@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sebastian Lucas Tagalog — Computer Engineering graduate portfolio.">
+  <meta name="theme-color" content="#F2F3F5">
+  <title>Sebastian Lucas Tagalog | Computer Engineer</title>
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js" defer></script>
+</head> 
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Sebastian Lucas Tagalog home">Sebastian Lucas Tagalog</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a class="resume-button" href="resume.html" aria-label="Open résumé">Résumé <span aria-hidden="true">↓</span></a>
+        <button class="icon-button" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode">
+          <span class="theme-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="system-progress" aria-hidden="true"><span></span></div>
+
+  <main id="main">
+    <section class="hero container" id="top" aria-labelledby="hero-title">
+      <div class="hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Living engineering system / 01</p>
+          <h1 id="hero-title">Sebastian Lucas Tagalog</h1>
+          <p class="role">Computer Engineering Graduate building useful connections between software, IoT, embedded systems, and automation.</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#projects">Trace the system <span aria-hidden="true">↘</span></a>
+            <button class="inspector-trigger secondary-button" type="button" aria-expanded="false" aria-controls="system-inspector">Open system inspector</button>
+          </div>
+          <div class="system-inspector" id="system-inspector" hidden>
+            <div><span>System status</span><strong><i class="status-dot" aria-hidden="true"></i>Online</strong></div>
+            <div><span>Architecture</span><strong>Hybrid</strong></div>
+            <div><span>Core domains</span><strong>Software / IoT / Embedded</strong></div>
+            <div><span>Primary project</span><strong>Neurovia</strong></div>
+          </div>
+        </div>
+
+        <div class="system-visual" data-system-visual>
+          <div class="visual-header"><span>SYS / 001</span><span data-system-state>System state: ready</span></div>
+          <svg class="system-svg" viewBox="0 0 640 500" role="img" aria-labelledby="system-title system-desc">
+            <title id="system-title">Interactive engineering domain map</title>
+            <desc id="system-desc">Sebastian Lucas Tagalog connected to software, IoT, embedded systems, automation, hardware, and data.</desc>
+            <defs><pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="currentColor" stroke-width="1" opacity=".12" /></pattern></defs>
+            <rect width="640" height="500" fill="url(#grid)" />
+            <g class="system-connections" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path class="system-path path-software" data-domain="software" d="M320 250C320 166 350 116 438 82" /><path class="system-path path-iot" data-domain="iot" d="M368 250C440 220 490 218 565 235" /><path class="system-path path-embedded" data-domain="embedded" d="M320 298C320 358 292 400 220 440" /><path class="system-path path-automation" data-domain="automation" d="M272 250C205 220 142 214 72 174" /><path class="system-path path-hardware" data-domain="hardware" d="M278 286C220 330 160 336 92 332" /><path class="system-path path-data" data-domain="data" d="M368 278C430 326 484 356 560 390" />
+            </g>
+            <g class="signal-pulses" aria-hidden="true"><circle class="signal-pulse" data-signal="0" r="4" /><circle class="signal-pulse" data-signal="1" r="3" /></g>
+            <g class="system-nodes">
+              <g class="system-node node-software" data-domain="software" tabindex="0" role="button" aria-label="Inspect software domain"><circle cx="438" cy="82" r="45" /><text class="node-label" x="438" y="78">SOFTWARE</text><text x="438" y="96" class="node-sub">interface + logic</text></g><g class="system-node node-iot" data-domain="iot" tabindex="0" role="button" aria-label="Inspect IoT domain"><circle cx="565" cy="235" r="42" /><text class="node-label" x="565" y="231">IoT</text><text x="565" y="249" class="node-sub">connected input</text></g><g class="system-node node-embedded" data-domain="embedded" tabindex="0" role="button" aria-label="Inspect embedded domain"><circle cx="220" cy="440" r="46" /><text class="node-label" x="220" y="436">EMBEDDED</text><text x="220" y="454" class="node-sub">device control</text></g><g class="system-node node-automation" data-domain="automation" tabindex="0" role="button" aria-label="Inspect automation domain"><circle cx="72" cy="174" r="46" /><text class="node-label" x="72" y="170">AUTOMATION</text><text x="72" y="188" class="node-sub">workflow</text></g><g class="system-node node-hardware" data-domain="hardware" tabindex="0" role="button" aria-label="Inspect hardware domain"><circle cx="92" cy="332" r="43" /><text class="node-label" x="92" y="328">HARDWARE</text><text x="92" y="346" class="node-sub">tangible layer</text></g><g class="system-node node-data" data-domain="data" tabindex="0" role="button" aria-label="Inspect data domain"><circle cx="560" cy="390" r="40" /><text class="node-label" x="560" y="386">DATA</text><text x="560" y="404" class="node-sub">feedback</text></g><g class="system-node node-core is-active" data-domain="core"><circle cx="320" cy="274" r="58" /><text class="node-label" x="320" y="270">SEBASTIAN</text><text x="320" y="289" class="node-sub">computer engineer</text></g>
+            </g>
+          </svg>
+          <div class="visual-readout"><span data-domain-readout>CORE / SYSTEM THINKING</span><span>Pointer or tap a node to inspect</span></div>
+          <div class="node-inspection" data-node-inspection aria-live="polite"><span class="node-inspection-label" data-node-label>CORE</span><strong data-node-title>System thinking</strong><p data-node-description>Select a domain node to inspect its role in the system.</p></div>
+        </div>
+      </div>
+
+      <div class="hero-rule" aria-hidden="true"></div>
+
+      <div class="meta-grid" aria-label="Professional details">
+        <div class="meta-row"><span>Location</span><code>Philippines</code></div>
+        <div class="meta-row"><span>Status</span><code><i class="status-dot" aria-hidden="true"></i>Open to work</code></div>
+        <div class="meta-row"><span>Stack</span><code>Python · TypeScript · IoT · Embedded</code></div>
+        <div class="meta-row"><span>Elsewhere</span><span class="meta-links">
+          <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="mailto:tagalogsebastian1@gmail.com">Email ↗</a>
+        </span></div>
+      </div>
+    </section>
+
+    <section class="section container about-section" id="about" aria-labelledby="about-title">
+      <div class="section-heading">
+        <h2 id="about-title">About</h2>
+      </div>
+      <div class="about-grid">
+        <div class="prose">
+          <p>I’m a Computer Engineering graduate who builds practical systems where software, hardware, and real-world use cases meet.</p>
+          <p>My academic work has covered programming, embedded systems, IoT, automation, documentation, testing, and system design. I gravitate toward problems where reliability and clear system behavior matter.</p>
+        </div>
+        <button class="profile-flip" type="button" aria-label="Show the back of Sebastian Lucas Tagalog's portrait" aria-pressed="false">
+          <span class="profile-flip-inner">
+            <span class="profile-face profile-front"><img class="profile-photo" src="Pajah pic.JPG" alt="Sebastian Lucas Tagalog"></span>
+            <span class="profile-face profile-back" aria-hidden="true"><img class="profile-photo" src="Pajah Pic (back).png" alt="The back of Sebastian Lucas Tagalog's portrait"></span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section container" id="skills" aria-labelledby="skills-title">
+      <div class="section-heading">
+        <h2 id="skills-title">Skills / Stack</h2>
+      </div>
+      <div class="skills-groups">
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <div class="pills">
+            <span class="pill"><span class="pill-mark">Py</span>Python</span>
+            <span class="pill"><span class="pill-mark">JS</span>JavaScript</span>
+            <span class="pill"><span class="pill-mark">TS</span>TypeScript</span>
+            <span class="pill"><span class="pill-mark">&lt;/&gt;</span>HTML / CSS</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Frameworks &amp; Tools</h3>
+          <div class="pills">
+            <span class="pill"><span class="pill-mark">UI</span>Responsive UI</span>
+            <span class="pill"><span class="pill-mark">IoT</span>IoT</span>
+            <span class="pill"><span class="pill-mark">MCU</span>Microcontrollers</span>
+            <span class="pill"><span class="pill-mark">Git</span>Git</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Concepts</h3>
+          <div class="pills">
+            <span class="pill"><span class="pill-mark">DS</span>Data Structures</span>
+            <span class="pill"><span class="pill-mark">OS</span>Operating Systems</span>
+            <span class="pill"><span class="pill-mark">NET</span>Computer Networks</span>
+            <span class="pill"><span class="pill-mark">SYS</span>System Integration</span>
+            <span class="pill"><span class="pill-mark">QA</span>Testing &amp; Documentation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container projects-section" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading projects-heading">
+        <div>
+          <h2 id="projects-title">Featured Projects</h2>
+        </div>
+        <p class="section-note">Selected academic and engineering work</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card" data-project>
+          <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-neurovia">
+            <div class="project-preview preview-neurovia" aria-hidden="true">
+              <div class="signal-line"><span>RFID</span><b>→</b><span>ESP32</span><b>→</b><span>Data Analytics Web Dashboard</span></div>
+              <div class="signal-readout"><span>INPUT</span><strong>TAG DETECTED</strong><span>OUTPUT</span></div>
+            </div>
+            <div class="project-title-row">
+              <h3>Neurovia</h3>
+              <div class="tags"><span>IoT</span><span>Embedded</span><span>RFID</span></div>
+            </div>
+            <p class="project-pitch">An IoT-enabled tangible system designed to support cognitive and motor rehabilitation for elderly users.</p>
+            <span class="expand-hint"><span aria-hidden="true">▸</span> View technical details</span>
+          </button>
+          <div class="project-details" id="project-neurovia" hidden>
+            <div class="architecture-panel">
+              <div class="architecture-intro"><span class="eyebrow">System architecture / 02</span><p data-architecture-description>Trace the path from tangible input to a useful interface. Select a component to inspect its role.</p></div>
+              <div class="architecture-flow" role="list" aria-label="Neurovia system architecture">
+                <button type="button" role="listitem" class="architecture-node is-selected" data-architecture="RFID"><span>01</span><strong>RFID</strong><small>tangible input</small></button><span class="architecture-arrow" aria-hidden="true">↓</span><button type="button" role="listitem" class="architecture-node" data-architecture="ESP32"><span>02</span><strong>ESP32-S3</strong><small>device control</small></button><span class="architecture-arrow" aria-hidden="true">↓</span><button type="button" role="listitem" class="architecture-node" data-architecture="Dashboard"><span>04</span><strong>Dashboard</strong><small>system feedback</small></button>
+              </div>
+            </div>
+            <dl>
+              <div><dt>Problem</dt><dd>Older adults can benefit from rehabilitation activities that combine physical interaction with cognitive tasks, but many activities are difficult to track consistently.</dd></div>
+              <div><dt>Approach</dt><dd>Built a tangible rehabilitation platform using 12 RFID-tagged tangible shapes, four RFID readers, a ESP32 Microcontroller, and Data Analytics therapist-facing web dashboard.</dd></div>
+              <div><dt>Result</dt><dd>Produced a functional prototype that records interaction and session performance for review, supporting structured cognitive and motor training activities.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="project-card" data-project>
+          <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-booking">
+            <div class="project-preview preview-booking" aria-hidden="true">
+              <div class="booking-row"><span>09:00</span><i></i><span>Available</span></div>
+              <div class="booking-row"><span>10:30</span><i></i><span>Reserved</span></div>
+              <div class="booking-row"><span>13:00</span><i></i><span>Available</span></div>
+            </div>
+            <div class="project-title-row">
+              <h3>Clinical Booking System</h3>
+              <div class="tags"><span>Web</span><span>UI</span></div>
+            </div>
+            <p class="project-pitch">A practical booking workflow focused on organizing appointments and improving access to clinical scheduling.</p>
+            <span class="expand-hint"><span aria-hidden="true">▸</span> View technical details</span>
+          </button>
+          <div class="project-details" id="project-booking" hidden>
+            <dl>
+              <div><dt>Problem</dt><dd>Appointment scheduling benefits from a clear workflow that reduces ambiguity around available time slots and booking information.</dd></div>
+              <div><dt>Approach</dt><dd>Designed a responsive interface around appointment discovery, selection, and confirmation, keeping the user flow direct and easy to scan.</dd></div>
+              <div><dt>Result</dt><dd>Created a usable booking-oriented web prototype with a clear scheduling flow and responsive presentation.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="project-card" data-project>
+          <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-automation">
+            <div class="project-preview preview-automation" aria-hidden="true">
+              <div class="automation-flow"><span>SENSOR</span><b>→</b><span>LOGIC</span><b>→</b><span>ACTION</span></div>
+              <pre aria-hidden="true">$ system.run()
+status: connected
+cycle: automated</pre>
+            </div>
+            <div class="project-title-row">
+              <h3>Engineering Automation Projects</h3>
+              <div class="tags"><span>Automation</span><span>IoT</span><span>Systems</span></div>
+            </div>
+            <p class="project-pitch">Hands-on engineering work exploring automation, embedded systems, connected technologies, and system integration.</p>
+            <span class="expand-hint"><span aria-hidden="true">▸</span> View technical details</span>
+          </button>
+          <div class="project-details" id="project-automation" hidden>
+            <dl>
+              <div><dt>Problem</dt><dd>Repetitive technical workflows often require dependable sensing, control logic, and clear feedback between system components.</dd></div>
+              <div><dt>Approach</dt><dd>Worked across microcontrollers, sensors, connectivity, testing, troubleshooting, and documentation to connect individual components into working prototypes.</dd></div>
+              <div><dt>Result</dt><dd>Built practical prototype workflows that strengthened experience in hardware–software integration and engineering validation.</dd></div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container experience-section" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading">
+        <h2 id="experience-title">Experience / Education</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <div>
+            <h3>Bachelor of Science in Computer Engineering</h3>
+            <p>Cavite State University – CCAT Campus</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <div>
+            <h3>Neurovia — Thesis / Capstone Project</h3>
+            <p>IoT-enabled tangible rehabilitation system combining RFID, embedded hardware, ESP32 Microcontroller, and a Data Analytics therapist-facing web dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container certifications-section" id="certifications" aria-labelledby="certifications-title">
+      <div class="section-heading projects-heading">
+        <div>
+          <h2 id="certifications-title">Certifications / Credentials</h2>
+        </div>
+        <p class="section-note">Credential registry / 04</p>
+      </div>
+      <div class="certification-grid">
+        <article class="certification-card">
+          <div class="certification-index">01</div>
+          <div>
+            <h3>Bachelor of Science in Computer Engineering</h3>
+            <p>Cavite State University – CCAT Campus</p>
+            <span class="certification-meta">Academic credential · 2026</span>
+            <a class="certification-button" href="resume.html">View Credential <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="certification-card certification-empty">
+          <div class="certification-index">02</div>
+          <div>
+            <h3>Computer Systems Servicing</h3>
+            <p>Technical Education and Skills Development Authority</p>
+            <span class="certification-meta">National Certificate II · 2026</span>
+            <a class="certification-button" href="https://www.tesda.gov.ph/Rwac/Rwac2017" target="_blank" rel="noreferrer">View Credential <span aria-hidden="true">↗</span></a>
+            <details class="verification-info">
+              <summary>Verification Info</summary>
+              <dl>
+                <div><dt>Last name</dt><dd>Tagalog</dd></div>
+                <div><dt>First Name</dt><dd>Sebastian</dd></div>
+                <div><dt>First four of certificate number</dt><dd>2613</dd></div>
+                <div><dt>Last four of certificate number</dt><dd>2927</dd></div>
+              </dl>
+            </details>
+          </div>
+        </article>
+        <article class="certification-card">
+          <div class="certification-index">03</div>
+          <div>
+            <h3>AI Essentials</h3>
+            <p>Artificial intelligence fundamentals and practical applications</p>
+            <span class="certification-meta">Certificate · 2026</span>
+            <a class="certification-button" href="AI%20Essential%20Certificate%20(1).pdf" target="_blank" rel="noreferrer">View Credential <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="certification-card certification-empty">
+          <div class="certification-index">04</div>
+          <div>
+            <h3>Gen AI to Z </h3>
+            <p>Generative artificial intelligence concepts and tools</p>
+            <span class="certification-meta">Certificate · 2026</span>
+            <a class="certification-button" href="Gen%20AI%20to%20Z%20Certificate.jpg" target="_blank" rel="noreferrer">View Credential <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="section-heading">
+        <h2 id="contact-title">Contact</h2>
+      </div>
+      <div class="contact-layout">
+        <div>
+          <p class="contact-lead">Have a project, opportunity, or idea? I’m open to entry-level opportunities, technical projects, and collaborations where I can learn, contribute, and grow.</p>
+          <div class="contact-actions">
+            <a class="primary-button" href="mailto:tagalogsebastian1@gmail.com">Email me</a>
+            <a class="secondary-button" href="resume.html">View résumé</a>
+          </div>
+        </div>
+        <div class="contact-details">
+          <div class="contact-row">
+            <span>Email</span>
+            <div class="copy-line">
+              <a href="mailto:tagalogsebastian1@gmail.com">tagalogsebastian1@gmail.com</a>
+              <button class="copy-button" type="button" data-copy-email aria-label="Copy email address" title="Copy email address">
+                <span aria-hidden="true">⧉</span>
+              </button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span>Socials</span>
+            <div class="social-links">
+              <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <span>Built by Sebastian Lucas Tagalog, 2026.</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <dialog class="command-palette" id="command-palette" aria-label="Command palette">
+    <form method="dialog">
+      <div class="palette-head">
+        <label for="palette-input">Jump to</label>
+        <button class="palette-close" value="close" aria-label="Close command palette">Esc</button>
+      </div>
+      <input id="palette-input" type="search" autocomplete="off" placeholder="About, Projects, Experience, Contact…">
+      <div class="palette-options">
+        <button type="button" data-command-target="#about">About</button>
+        <button type="button" data-command-target="#projects">Projects</button>
+        <button type="button" data-command-target="#experience">Experience</button>
+        <button type="button" data-command-target="#contact">Contact</button>
+        <button type="button" data-command-copy>Copy email</button>
+      </div>
+      <p class="palette-hint">Ctrl+K / ⌘K to open · Esc to close</p>
+    </form>
+  </dialog>
+</body>
+</html>
