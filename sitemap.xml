@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://seb-lucas.github.io/</loc>
+    </url>
+
+    <url>
+        <loc>https://seb-lucas.github.io/about.html</loc>
+    </url>
+
+    <url>
+        <loc>https://seb-lucas.github.io/skills.html</loc>
+    </url>
+
+    <url>
+        <loc>https://seb-lucas.github.io/projects.html</loc>
+    </url>
+
+    <url>
+        <loc>https://seb-lucas.github.io/contact.html</loc>
+    </url>
+
+</urlset>
