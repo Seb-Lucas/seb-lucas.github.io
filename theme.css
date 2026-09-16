@@ -103,10 +103,16 @@ html.dark .theme-icon::before { content: "☾"; }
 .system-inspector div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
 .system-inspector span { color: var(--muted); }
 .system-inspector strong { font-weight: 400; text-align: right; }
-.system-visual { min-width: 0; border: 1px solid var(--line); background: var(--surface); padding: 14px; }
+.system-visual { min-width: 0; border: 1px solid var(--line); background: var(--surface); padding: 14px; overflow: hidden; }
 .visual-header, .visual-readout { display: flex; justify-content: space-between; gap: 16px; color: var(--muted); }
 .system-svg { display: block; width: 100%; height: auto; margin: 8px 0; color: var(--line); overflow: visible; }
-.system-node { cursor: pointer; outline: none; transform-box: fill-box; transform-origin: center; transition: transform .35s var(--ease); }
+.system-visual.is-domain-focused .system-svg { filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 14%, transparent)); }
+.system-visual.is-domain-focused .system-svg > rect { opacity: 0; }
+.system-visual.is-domain-focused .system-node:not(.is-selected) { visibility: hidden; opacity: 0; pointer-events: none; }
+.system-visual.is-domain-focused .system-path { opacity: 0; }
+.system-visual.is-domain-focused .signal-pulses { opacity: 0; transition: opacity .25s ease; }
+.system-visual.is-domain-focused .node-inspection { animation: inspection-reveal .65s ease both; }
+.system-node { cursor: pointer; outline: none; transform-box: fill-box; transform-origin: center; opacity: 1; visibility: visible; transition: transform .55s var(--ease), opacity .55s ease, visibility 0s linear; }
 .system-node circle { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; transition: fill .35s ease, stroke .35s ease; }
 .system-node text { fill: var(--ink); font: 500 11px "JetBrains Mono", monospace; text-anchor: middle; pointer-events: none; transition: fill .35s ease, letter-spacing .35s ease, opacity .35s ease; }
 .system-node .node-sub { fill: var(--muted); font-size: 8px; font-weight: 400; transition: fill .35s ease, opacity .35s ease; }
@@ -118,7 +124,8 @@ html.dark .theme-icon::before { content: "☾"; }
 .system-node.node-core circle { fill: var(--ink); stroke: var(--ink); }
 .system-node.node-core text { fill: var(--paper); }
 .system-node.node-core .node-sub { fill: color-mix(in srgb, var(--paper) 70%, transparent); }
-.system-path { stroke: var(--line); stroke-dasharray: 5 8; transition: stroke .2s ease, stroke-width .2s ease; }
+.system-path { stroke: var(--line); stroke-dasharray: 5 8; opacity: 1; transition: opacity .55s ease, stroke .2s ease, stroke-width .2s ease; }
+.system-svg > rect { transition: opacity .55s ease; }
 .system-path.is-active, .system-path.is-signaled { stroke: var(--accent); stroke-width: 2.5; }
 .signal-pulses circle { fill: var(--accent); filter: drop-shadow(0 0 3px color-mix(in srgb, var(--accent) 55%, transparent)); }
 .visual-readout { border-top: 1px solid var(--line); padding-top: 10px; font-size: 10px; }
@@ -127,6 +134,7 @@ html.dark .theme-icon::before { content: "☾"; }
 .node-inspection-label { grid-row: span 2; align-self: start; padding: 4px 6px; border: 1px solid var(--accent); color: var(--accent); font: 10px "JetBrains Mono", monospace; }
 .node-inspection strong { font-size: 15px; font-weight: 500; }
 .node-inspection p { grid-column: 2; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+@keyframes inspection-reveal { from { opacity: .35; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .architecture-panel { display: grid; grid-template-columns: .8fr 1.2fr; gap: 24px; padding: 20px 0 26px; border-bottom: 1px solid var(--line); }
 .architecture-intro p { margin: 10px 0 0; max-width: 34ch; color: var(--muted); font: 15px/1.55 inherit; text-transform: none; letter-spacing: 0; }
 .architecture-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 8px; align-items: center; }

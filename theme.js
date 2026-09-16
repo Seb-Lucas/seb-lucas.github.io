@@ -77,7 +77,53 @@
       const inspectionLabel = systemVisual.querySelector("[data-node-label]");
       const inspectionTitle = systemVisual.querySelector("[data-node-title]");
       const inspectionDescription = systemVisual.querySelector("[data-node-description]");
+      const systemSvg = systemVisual.querySelector(".system-svg");
+      const defaultViewBox = { x: 0, y: 0, width: 640, height: 500 };
       let selectedDomain = "core";
+      let focusedDomain = "";
+      let viewBoxFrame;
+      const readViewBox = () => systemSvg.viewBox.baseVal;
+      const animateViewBox = (target) => {
+        window.cancelAnimationFrame(viewBoxFrame);
+        const current = readViewBox();
+        const start = { x: current.x, y: current.y, width: current.width, height: current.height };
+        if (reducedMotion) {
+          systemSvg.setAttribute("viewBox", `${target.x} ${target.y} ${target.width} ${target.height}`);
+          return;
+        }
+        const startedAt = performance.now();
+        const duration = 1050;
+        const ease = (progress) => progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+        const step = (now) => {
+          const progress = Math.min((now - startedAt) / duration, 1);
+          const eased = ease(progress);
+          const viewBox = Object.keys(target).map((key) => start[key] + (target[key] - start[key]) * eased);
+          systemSvg.setAttribute("viewBox", viewBox.join(" "));
+          if (progress < 1) viewBoxFrame = window.requestAnimationFrame(step);
+        };
+        viewBoxFrame = window.requestAnimationFrame(step);
+      };
+      const focusNode = (node) => {
+        const circle = node.querySelector("circle");
+        const x = Number(circle.getAttribute("cx"));
+        const y = Number(circle.getAttribute("cy"));
+        const radius = Number(circle.getAttribute("r"));
+        const ratio = systemSvg.clientWidth / systemSvg.clientHeight || 1.28;
+        const height = Math.max(radius * 4.4, 220);
+        const width = height * ratio;
+        animateViewBox({ x: x - width / 2, y: y - height / 2, width, height });
+        systemVisual.classList.add("is-domain-focused");
+      };
+      const restoreMap = () => {
+        focusedDomain = "";
+        systemVisual.querySelectorAll(".system-node").forEach((node) => {
+          node.classList.remove("is-hovered", "is-focused");
+        });
+        animateViewBox(defaultViewBox);
+        systemVisual.classList.remove("is-domain-focused");
+      };
       const activateDomain = (domain) => {
         const details = domainDetails[domain];
         systemVisual.querySelectorAll("[data-domain]").forEach((element) => {
@@ -94,6 +140,7 @@
         inspectionDescription.textContent = details?.description || "Select a domain node to inspect its role in the system.";
       };
       systemVisual.querySelectorAll(".system-node[data-domain]").forEach((node) => {
+        if (!domainDetails[node.dataset.domain]) return;
         const preview = () => {
           node.classList.add("is-hovered");
           activateDomain(node.dataset.domain);
@@ -113,14 +160,30 @@
           activateDomain(selectedDomain);
         });
         node.addEventListener("click", () => {
+          if (focusedDomain === node.dataset.domain) {
+            selectedDomain = "core";
+            activateDomain(selectedDomain);
+            restoreMap();
+            return;
+          }
           selectedDomain = node.dataset.domain;
+          focusedDomain = selectedDomain;
           activateDomain(selectedDomain);
+          focusNode(node);
         });
         node.addEventListener("keydown", (event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
+            if (focusedDomain === node.dataset.domain) {
+              selectedDomain = "core";
+              activateDomain(selectedDomain);
+              restoreMap();
+              return;
+            }
             selectedDomain = node.dataset.domain;
+            focusedDomain = selectedDomain;
             activateDomain(selectedDomain);
+            focusNode(node);
           }
         });
       });
