@@ -10,8 +10,7 @@ portfolio/
 ├── resume.html      # Printable résumé page
 ├── theme.css        # Design tokens, responsive layout, accessibility styles
 ├── theme.js         # Dark mode, project interaction, copy email, command palette
-├── Pajah pic.JPG    # Existing profile photo from the supplied portfolio
-├── assets/
+├── assets/          # Portfolio images, certificates, and preview assets
 │   └── stitch-previews/  # Original Stitch preview assets retained
 ├── about.html
 ├── skills.html
