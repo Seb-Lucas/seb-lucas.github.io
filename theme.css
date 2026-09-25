@@ -193,13 +193,36 @@ html.dark .theme-icon::before { content: "☾"; }
 .projects-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; }
 .section-note { margin: 0; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 13px; }
 .project-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; align-items: start; }
-.project-card { grid-column: span 12; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.project-card {
+  --project-glow: var(--accent);
+  grid-column: span 12;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--project-glow) 0%, transparent), transparent 48%), var(--surface);
+  overflow: hidden;
+  transition: transform .45s var(--ease), border-color .45s ease, background .45s ease, box-shadow .45s ease;
+}
+.project-card:nth-child(1) { --project-glow: #2D73D5; }
+.project-card:nth-child(2) { --project-glow: #168A86; }
+.project-card:nth-child(3) { --project-glow: #B56A2A; }
+.project-card:is(:hover, :focus-within) {
+  border-color: color-mix(in srgb, var(--project-glow) 52%, var(--line));
+  background: radial-gradient(circle at var(--pointer-x, 88%) var(--pointer-y, 0%), color-mix(in srgb, var(--project-glow) 14%, transparent), transparent 52%), var(--surface);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--project-glow) 10%, transparent);
+  transform: perspective(900px) translateY(-3px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
+  will-change: transform, background;
+}
 .project-summary {
   width: 100%; padding: 0; text-align: left; border: 0; background: transparent; cursor: pointer;
 }
 .project-preview {
   min-height: 150px; border-bottom: 1px solid var(--line); display: grid; place-items: center;
   padding: 24px; color: var(--muted); background: var(--paper);
+  transition: background .45s ease, color .45s ease;
+}
+.project-card:is(:hover, :focus-within) .project-preview {
+  background: color-mix(in srgb, var(--project-glow) 7%, var(--paper));
+  color: var(--ink);
 }
 .signal-line, .automation-flow { display: flex; align-items: center; gap: 12px; font-family: "JetBrains Mono", monospace; font-size: 13px; }
 .signal-line b, .automation-flow b { color: var(--accent); font-weight: 400; }
@@ -250,9 +273,34 @@ html.dark .theme-icon::before { content: "☾"; }
 .timeline-item p { margin: 0; color: var(--muted); max-width: 68ch; }
 .certification-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .certification-card {
+  --credential-glow: #C3A35B;
   display: grid; grid-template-columns: 44px 1fr; gap: 20px; min-height: 170px;
-  padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  position: relative; isolation: isolate; overflow: hidden;
+  padding: 24px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: radial-gradient(circle at var(--pointer-x, 100%) var(--pointer-y, 0%), color-mix(in srgb, var(--credential-glow) 0%, transparent), transparent 55%), var(--surface);
+  transition: transform .5s var(--ease), border-color .4s ease, background .5s ease, box-shadow .5s ease;
 }
+.certification-card::before {
+  content: ""; position: absolute; z-index: -1; inset: 0;
+  background: linear-gradient(115deg, transparent 35%, color-mix(in srgb, var(--credential-glow) 0%, transparent) 50%, transparent 65%);
+  transform: translateX(-120%); transition: transform .75s var(--ease), opacity .4s ease;
+  pointer-events: none;
+}
+.certification-card:nth-child(2n) { --credential-glow: #8CA8B2; }
+.certification-card:is(:hover, :focus-within) {
+  border-color: color-mix(in srgb, var(--credential-glow) 55%, var(--line));
+  background: radial-gradient(circle at var(--pointer-x, 100%) var(--pointer-y, 0%), color-mix(in srgb, var(--credential-glow) 13%, transparent), transparent 58%), var(--surface);
+  box-shadow: 0 16px 38px color-mix(in srgb, var(--credential-glow) 12%, transparent);
+  transform: perspective(1000px) translateY(-4px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
+  will-change: transform, background;
+}
+.certification-card:is(:hover, :focus-within)::before { transform: translateX(120%); opacity: .8; }
+.certification-card:is(:hover, :focus-within) .certification-index,
+.certification-card:is(:hover, :focus-within) .certification-meta { color: var(--credential-glow); }
+.certification-card > * { position: relative; }
+.certification-card h3, .certification-card p { transition: color .35s ease; }
+.certification-card:is(:hover, :focus-within) h3 { color: color-mix(in srgb, var(--ink) 88%, var(--credential-glow)); }
+.certification-card:is(:hover, :focus-within) p { color: var(--ink); }
 .certification-index { color: var(--accent); font: 12px "JetBrains Mono", monospace; }
 .certification-card h3 { margin: 0 0 8px; font-size: 20px; line-height: 1.25; font-weight: 600; }
 .certification-card p { margin: 0 0 18px; color: var(--muted); }

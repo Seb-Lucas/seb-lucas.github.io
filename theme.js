@@ -249,6 +249,25 @@
     document.querySelectorAll("[data-project]").forEach((card) => {
       const trigger = card.querySelector(".project-summary");
       const details = card.querySelector(".project-details");
+      const resetPointerState = () => {
+        card.style.removeProperty("--pointer-x");
+        card.style.removeProperty("--pointer-y");
+        card.style.removeProperty("--tilt-x");
+        card.style.removeProperty("--tilt-y");
+      };
+      if (!reducedMotion) {
+        card.addEventListener("pointermove", (event) => {
+          if (event.pointerType !== "mouse") return;
+          const bounds = card.getBoundingClientRect();
+          const x = (event.clientX - bounds.left) / bounds.width;
+          const y = (event.clientY - bounds.top) / bounds.height;
+          card.style.setProperty("--pointer-x", `${x * 100}%`);
+          card.style.setProperty("--pointer-y", `${y * 100}%`);
+          card.style.setProperty("--tilt-x", `${(x - 0.5) * 2.4}deg`);
+          card.style.setProperty("--tilt-y", `${(0.5 - y) * 1.8}deg`);
+        });
+        card.addEventListener("pointerleave", resetPointerState);
+      }
       trigger.addEventListener("click", () => {
         const opening = trigger.getAttribute("aria-expanded") !== "true";
         trigger.setAttribute("aria-expanded", String(opening));
@@ -272,6 +291,28 @@
           }
         }
       });
+    });
+
+    document.querySelectorAll("[data-credential]").forEach((card) => {
+      const resetPointerState = () => {
+        card.style.removeProperty("--pointer-x");
+        card.style.removeProperty("--pointer-y");
+        card.style.removeProperty("--tilt-x");
+        card.style.removeProperty("--tilt-y");
+      };
+      if (!reducedMotion) {
+        card.addEventListener("pointermove", (event) => {
+          if (event.pointerType !== "mouse") return;
+          const bounds = card.getBoundingClientRect();
+          const x = (event.clientX - bounds.left) / bounds.width;
+          const y = (event.clientY - bounds.top) / bounds.height;
+          card.style.setProperty("--pointer-x", `${x * 100}%`);
+          card.style.setProperty("--pointer-y", `${y * 100}%`);
+          card.style.setProperty("--tilt-x", `${(x - 0.5) * 1.8}deg`);
+          card.style.setProperty("--tilt-y", `${(0.5 - y) * 1.3}deg`);
+        });
+        card.addEventListener("pointerleave", resetPointerState);
+      }
     });
 
     // Copy-to-clipboard confirmation.
