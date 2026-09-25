@@ -7,6 +7,10 @@
   --muted: #5B6472;
   --line: #D9DCE3;
   --accent: #2954E0;
+  --interactive-surface: #F8F9FB;
+  --interactive-shadow: rgba(20, 24, 31, .10);
+  --interactive-glow-strength: 7%;
+  --interactive-sheen-strength: 10%;
   --max: 1120px;
   --side: 80px;
   --radius: 4px;
@@ -20,6 +24,10 @@ html.dark {
   --muted: #969BA4;
   --line: #25272B;
   --accent: #6D8DFF;
+  --interactive-surface: #16181C;
+  --interactive-shadow: rgba(0, 0, 0, .28);
+  --interactive-glow-strength: 14%;
+  --interactive-sheen-strength: 16%;
   color-scheme: dark;
 }
 
@@ -198,7 +206,7 @@ html.dark .theme-icon::before { content: "☾"; }
   grid-column: span 12;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--project-glow) 0%, transparent), transparent 48%), var(--surface);
+  background: radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--project-glow) 3%, transparent), transparent 48%), var(--surface);
   overflow: hidden;
   transition: transform .45s var(--ease), border-color .45s ease, background .45s ease, box-shadow .45s ease;
 }
@@ -207,8 +215,8 @@ html.dark .theme-icon::before { content: "☾"; }
 .project-card:nth-child(3) { --project-glow: #B56A2A; }
 .project-card:is(:hover, :focus-within) {
   border-color: color-mix(in srgb, var(--project-glow) 52%, var(--line));
-  background: radial-gradient(circle at var(--pointer-x, 88%) var(--pointer-y, 0%), color-mix(in srgb, var(--project-glow) 14%, transparent), transparent 52%), var(--surface);
-  box-shadow: 0 14px 34px color-mix(in srgb, var(--project-glow) 10%, transparent);
+  background: radial-gradient(circle at var(--pointer-x, 88%) var(--pointer-y, 0%), color-mix(in srgb, var(--project-glow) var(--interactive-glow-strength), transparent), transparent 52%), var(--interactive-surface);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--interactive-shadow) 100%, transparent);
   transform: perspective(900px) translateY(-3px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
   will-change: transform, background;
 }
@@ -277,20 +285,20 @@ html.dark .theme-icon::before { content: "☾"; }
   display: grid; grid-template-columns: 44px 1fr; gap: 20px; min-height: 170px;
   position: relative; isolation: isolate; overflow: hidden;
   padding: 24px; border: 1px solid var(--line); border-radius: var(--radius);
-  background: radial-gradient(circle at var(--pointer-x, 100%) var(--pointer-y, 0%), color-mix(in srgb, var(--credential-glow) 0%, transparent), transparent 55%), var(--surface);
+  background: radial-gradient(circle at var(--pointer-x, 100%) var(--pointer-y, 0%), color-mix(in srgb, var(--credential-glow) 3%, transparent), transparent 55%), var(--surface);
   transition: transform .5s var(--ease), border-color .4s ease, background .5s ease, box-shadow .5s ease;
 }
 .certification-card::before {
   content: ""; position: absolute; z-index: -1; inset: 0;
-  background: linear-gradient(115deg, transparent 35%, color-mix(in srgb, var(--credential-glow) 0%, transparent) 50%, transparent 65%);
+  background: linear-gradient(115deg, transparent 35%, color-mix(in srgb, var(--credential-glow) var(--interactive-sheen-strength), transparent) 50%, transparent 65%);
   transform: translateX(-120%); transition: transform .75s var(--ease), opacity .4s ease;
   pointer-events: none;
 }
 .certification-card:nth-child(2n) { --credential-glow: #8CA8B2; }
 .certification-card:is(:hover, :focus-within) {
   border-color: color-mix(in srgb, var(--credential-glow) 55%, var(--line));
-  background: radial-gradient(circle at var(--pointer-x, 100%) var(--pointer-y, 0%), color-mix(in srgb, var(--credential-glow) 13%, transparent), transparent 58%), var(--surface);
-  box-shadow: 0 16px 38px color-mix(in srgb, var(--credential-glow) 12%, transparent);
+  background: radial-gradient(circle at var(--pointer-x, 100%) var(--pointer-y, 0%), color-mix(in srgb, var(--credential-glow) var(--interactive-glow-strength), transparent), transparent 58%), var(--interactive-surface);
+  box-shadow: 0 16px 38px color-mix(in srgb, var(--interactive-shadow) 100%, transparent);
   transform: perspective(1000px) translateY(-4px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
   will-change: transform, background;
 }
