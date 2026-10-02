@@ -24,6 +24,25 @@
   applyTheme(getInitialTheme());
 
   document.addEventListener("DOMContentLoaded", () => {
+    if (!reducedMotion && "IntersectionObserver" in window) {
+      const revealTargets = document.querySelectorAll(
+        ".hero-layout, .section-heading, .about-grid, .skill-group, .project-card, .timeline-item, .certification-card, .contact-layout, .project-detail-hero > .container, .project-detail-block > .container, .resume-head, .resume > section"
+      );
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(({ isIntersecting, target }) => {
+          target.classList.toggle("is-revealed", isIntersecting);
+        });
+      }, { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
+
+      if (revealTargets.length) {
+        document.documentElement.classList.add("has-scroll-reveal");
+        revealTargets.forEach((target) => {
+          target.classList.add("scroll-reveal");
+          revealObserver.observe(target);
+        });
+      }
+    }
+
     document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
       button.addEventListener("click", () => {
         const next = root.classList.contains("dark") ? "light" : "dark";
@@ -63,12 +82,42 @@
     }
 
     const domainDetails = {
-      software: { label: "SOFTWARE", title: "Interface + logic", description: "Turns system behavior into usable application logic and interfaces." },
-      iot: { label: "IoT", title: "Connected input", description: "Connects physical devices and captures information from the environment." },
-      embedded: { label: "EMBEDDED", title: "Device control", description: "Coordinates device-side behavior where hardware and software meet." },
-      automation: { label: "AUTOMATION", title: "Workflow", description: "Links sensing, decision-making, and action into a repeatable process." },
-      hardware: { label: "HARDWARE", title: "Tangible layer", description: "Provides the physical components that make interaction possible." },
-      data: { label: "DATA", title: "System feedback", description: "Returns system information in a form that can be reviewed and acted on." }
+      software: {
+        label: "SOFTWARE", title: "Interface + logic",
+        description: "Connects interaction design with practical application workflows in the clinical booking prototype.",
+        skills: "Responsive UI · JavaScript · Interface design",
+        project: "Clinical Booking System", href: "project-clinical-booking.html"
+      },
+      iot: {
+        label: "IoT", title: "Connected input",
+        description: "Neurovia carries tagged-object input through RFID readers and an ESP32 into a therapist-facing dashboard.",
+        skills: "RFID · ESP32 · Connected systems",
+        project: "Neurovia", href: "project-neurovia.html"
+      },
+      embedded: {
+        label: "EMBEDDED", title: "Device control",
+        description: "The Neurovia prototype uses an ESP32 microcontroller to connect physical inputs with software feedback.",
+        skills: "ESP32-S3 · Microcontrollers · Integration",
+        project: "Neurovia", href: "project-neurovia.html"
+      },
+      automation: {
+        label: "AUTOMATION", title: "Workflow",
+        description: "Hands-on prototypes explore sensing, control logic, connectivity, testing, and repeatable system behavior.",
+        skills: "Sensors · Control logic · System integration",
+        project: "Engineering Automation Projects", href: "project-automation.html"
+      },
+      hardware: {
+        label: "HARDWARE", title: "Tangible layer",
+        description: "Neurovia pairs RFID-tagged tangible shapes with readers and embedded control for physical interaction.",
+        skills: "RFID readers · Tagged objects · Device integration",
+        project: "Neurovia", href: "project-neurovia.html"
+      },
+      data: {
+        label: "DATA", title: "System feedback",
+        description: "Neurovia records interaction and session performance for review through a therapist-facing analytics dashboard.",
+        skills: "Interaction tracking · Session data · Analytics dashboard",
+        project: "Neurovia", href: "project-neurovia.html"
+      }
     };
     const systemVisual = document.querySelector("[data-system-visual]");
     if (systemVisual) {
@@ -77,6 +126,9 @@
       const inspectionLabel = systemVisual.querySelector("[data-node-label]");
       const inspectionTitle = systemVisual.querySelector("[data-node-title]");
       const inspectionDescription = systemVisual.querySelector("[data-node-description]");
+      const inspectionSkills = systemVisual.querySelector("[data-node-skills]");
+      const inspectionLink = systemVisual.querySelector("[data-node-link]");
+      const mapReset = systemVisual.querySelector("[data-map-reset]");
       const systemSvg = systemVisual.querySelector(".system-svg");
       const defaultViewBox = { x: 0, y: 0, width: 640, height: 500 };
       let selectedDomain = "core";
@@ -137,8 +189,18 @@
         state.textContent = details ? `System state: ${domain}` : "System state: ready";
         inspectionLabel.textContent = details?.label || "CORE";
         inspectionTitle.textContent = details?.title || "System thinking";
-        inspectionDescription.textContent = details?.description || "Select a domain node to inspect its role in the system.";
+        inspectionDescription.textContent = details?.description || "Select a domain to connect relevant skills with project evidence.";
+        inspectionSkills.textContent = details?.skills || "Choose any connected domain";
+        inspectionLink.href = details?.href || "#projects";
+        inspectionLink.querySelector("[data-node-link-label]").textContent = details ? `View ${details.project}` : "Browse featured projects";
       };
+      const resetMap = () => {
+        selectedDomain = "core";
+        activateDomain(selectedDomain);
+        restoreMap();
+        mapReset.disabled = true;
+      };
+      mapReset.addEventListener("click", resetMap);
       systemVisual.querySelectorAll(".system-node[data-domain]").forEach((node) => {
         if (!domainDetails[node.dataset.domain]) return;
         const preview = () => {
@@ -161,29 +223,27 @@
         });
         node.addEventListener("click", () => {
           if (focusedDomain === node.dataset.domain) {
-            selectedDomain = "core";
-            activateDomain(selectedDomain);
-            restoreMap();
+            resetMap();
             return;
           }
           selectedDomain = node.dataset.domain;
           focusedDomain = selectedDomain;
           activateDomain(selectedDomain);
           focusNode(node);
+          mapReset.disabled = false;
         });
         node.addEventListener("keydown", (event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             if (focusedDomain === node.dataset.domain) {
-              selectedDomain = "core";
-              activateDomain(selectedDomain);
-              restoreMap();
+              resetMap();
               return;
             }
             selectedDomain = node.dataset.domain;
             focusedDomain = selectedDomain;
             activateDomain(selectedDomain);
             focusNode(node);
+            mapReset.disabled = false;
           }
         });
       });
@@ -245,7 +305,6 @@
       });
     });
 
-    // Project cards: user-triggered only. No scroll-reveal animation.
     document.querySelectorAll("[data-project]").forEach((card) => {
       const trigger = card.querySelector(".project-summary");
       const details = card.querySelector(".project-details");

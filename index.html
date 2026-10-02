@@ -66,8 +66,17 @@
               <g class="system-node node-software" data-domain="software" tabindex="0" role="button" aria-label="Inspect software domain"><circle cx="438" cy="82" r="45" /><text class="node-label" x="438" y="78">SOFTWARE</text><text x="438" y="96" class="node-sub">interface + logic</text></g><g class="system-node node-iot" data-domain="iot" tabindex="0" role="button" aria-label="Inspect IoT domain"><circle cx="565" cy="235" r="42" /><text class="node-label" x="565" y="231">IoT</text><text x="565" y="249" class="node-sub">connected input</text></g><g class="system-node node-embedded" data-domain="embedded" tabindex="0" role="button" aria-label="Inspect embedded domain"><circle cx="220" cy="440" r="46" /><text class="node-label" x="220" y="436">EMBEDDED</text><text x="220" y="454" class="node-sub">device control</text></g><g class="system-node node-automation" data-domain="automation" tabindex="0" role="button" aria-label="Inspect automation domain"><circle cx="72" cy="174" r="46" /><text class="node-label" x="72" y="170">AUTOMATION</text><text x="72" y="188" class="node-sub">workflow</text></g><g class="system-node node-hardware" data-domain="hardware" tabindex="0" role="button" aria-label="Inspect hardware domain"><circle cx="92" cy="332" r="43" /><text class="node-label" x="92" y="328">HARDWARE</text><text x="92" y="346" class="node-sub">tangible layer</text></g><g class="system-node node-data" data-domain="data" tabindex="0" role="button" aria-label="Inspect data domain"><circle cx="560" cy="390" r="40" /><text class="node-label" x="560" y="386">DATA</text><text x="560" y="404" class="node-sub">feedback</text></g><g class="system-node node-core is-active" data-domain="core"><circle cx="320" cy="274" r="58" /><text class="node-label" x="320" y="270">SEBASTIAN</text><text x="320" y="289" class="node-sub">computer engineer</text></g>
             </g>
           </svg>
-          <div class="visual-readout"><span data-domain-readout>CORE / SYSTEM THINKING</span><span>Pointer or tap a node to inspect</span></div>
-          <div class="node-inspection" data-node-inspection aria-live="polite"><span class="node-inspection-label" data-node-label>CORE</span><strong data-node-title>System thinking</strong><p data-node-description>Select a domain node to inspect its role in the system.</p></div>
+          <div class="visual-readout"><span data-domain-readout>CORE / SYSTEM THINKING</span><span>Choose a domain to explore skills and project evidence</span></div>
+          <div class="node-inspection" data-node-inspection aria-live="polite">
+            <span class="node-inspection-label" data-node-label>CORE</span>
+            <strong data-node-title>System thinking</strong>
+            <p data-node-description>Select a domain to connect relevant skills with project evidence.</p>
+            <div class="node-inspection-skills"><span>Related skills</span><span data-node-skills>Choose any connected domain</span></div>
+            <div class="node-inspection-actions">
+              <a class="node-evidence-link" data-node-link href="#projects"><span data-node-link-label>Browse featured projects</span><span aria-hidden="true">↗</span></a>
+              <button class="node-reset" type="button" data-map-reset disabled>Reset map</button>
+            </div>
+          </div>
         </div>
       </div>
 
