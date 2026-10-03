@@ -220,6 +220,7 @@ html.dark .theme-icon::before { content: "☾"; }
 .project-card:nth-child(1) { --project-glow: #2D73D5; }
 .project-card:nth-child(2) { --project-glow: #168A86; }
 .project-card:nth-child(3) { --project-glow: #B56A2A; }
+.project-card-high-velocity { order: -1; }
 .project-card:is(:hover, :focus-within) {
   border-color: color-mix(in srgb, var(--project-glow) 52%, var(--line));
   background: radial-gradient(circle at var(--pointer-x, 88%) var(--pointer-y, 0%), color-mix(in srgb, var(--project-glow) var(--interactive-glow-strength), transparent), transparent 52%), var(--interactive-surface);
