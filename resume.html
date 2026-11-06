@@ -1,61 +1,28 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="assets/S%20stussy%20inspired.png?v=20260924">
-<title>Résumé | Sebastian Lucas Tagalog</title>
-<link rel="stylesheet" href="theme.css">
-<script src="theme.js" defer></script>
-<style>
-  body { padding: 48px 0; }
-  .resume { background: var(--surface); border: 1px solid var(--line); padding: 48px; }
-  .resume-head { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 32px; }
-  .resume h1 { margin: 0; font-size: 36px; }
-  .resume .role { margin-top: 6px; font-size: 17px; }
-  .resume-meta { margin-top: 12px; font: 13px/1.6 "JetBrains Mono", monospace; color: var(--muted); }
-  .resume h2 { font-size: 20px; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-top: 32px; }
-  .resume p, .resume li { max-width: 72ch; }
-  .resume ul { padding-left: 20px; }
-  .print-actions { width: min(calc(100% - 40px), 1120px); margin: 0 auto 16px; display:flex; justify-content:space-between; }
-  @media print { body { padding: 0; background: white; } .print-actions { display:none; } .resume { border:0; padding:0; } }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View and download Sebastian Lucas Tagalog's résumé PDF.">
+  <title>View Résumé | Sebastian Lucas Tagalog</title>
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js" defer></script>
+  <style>
+    .resume-page { padding-block: 32px; }
+    .resume-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .resume-viewer { display: block; width: 100%; height: min(78vh, 1100px); min-height: 480px; border: 0; border-radius: 18px; background: var(--surface); box-shadow: var(--shadow-raised); }
+    @media (max-width: 520px) { .resume-toolbar { align-items: flex-start; flex-direction: column; } .resume-viewer { min-height: 65vh; } }
+  </style>
 </head>
 <body>
-<div class="print-actions">
-  <a href="index.html">← Portfolio</a>
-  <button class="secondary-button" onclick="window.print()">Print / Save as PDF</button>
-</div>
-<main class="resume container">
-  <header class="resume-head">
-    <h1>Sebastian Lucas Tagalog</h1>
-    <p class="role">Computer Engineer — software, IoT &amp; embedded systems</p>
-    <p class="resume-meta">Email: tagalogsebastian1@gmail.com · Location: Philippines</p>
-  </header>
-  <section>
-    <h2>Profile</h2>
-    <p>Computer Engineering graduate focused on practical systems that connect software, hardware, and real-world use cases. Academic work covers programming, embedded systems, IoT, automation, documentation, testing, and system design.</p>
-  </section>
-  <section>
-    <h2>Education</h2>
-    <p><strong>Bachelor of Science in Computer Engineering</strong><br>Cavite State University – CCAT Campus · 2026</p>
-  </section>
-  <section>
-    <h2>Selected Projects</h2>
-    <ul>
-      <li><strong>Neurovia:</strong> IoT-enabled tangible rehabilitation system using RFID-tagged objects, ESP32-S3, Raspberry Pi, and a therapist-facing web dashboard.</li>
-      <li><strong>Clinical Booking System:</strong> Responsive booking-oriented web prototype for organizing clinical appointments and access to scheduling information.</li>
-      <li><strong>Engineering Automation Projects:</strong> Hands-on work involving automation, embedded systems, connectivity, testing, troubleshooting, and system integration.</li>
-    </ul>
-  </section>
-  <section>
-    <h2>Technical Skills</h2>
-    <p>Python · JavaScript · TypeScript · HTML/CSS · Responsive UI · IoT · Microcontrollers · Git · Data Structures · Operating Systems · Computer Networks · System Integration · Testing &amp; Documentation</p>
-  </section>
-  <section>
-    <h2>Links</h2>
-    <p><a href="https://github.com/Seb-Lucas" target="_blank" rel="noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/sebastian-tagalog-7122573b0/" target="_blank" rel="noreferrer">LinkedIn</a></p>
-  </section>
-</main>
+  <main class="resume-page container">
+    <div class="resume-toolbar">
+      <a class="project-back-link" href="index.html">← Back to portfolio</a>
+      <a class="primary-button" href="assets/Resume%20(Sebastian%20Tagalog).pdf" download="Resume (Sebastian Tagalog).pdf" type="application/pdf">Download résumé PDF <span aria-hidden="true">↓</span></a>
+    </div>
+    <iframe class="resume-viewer" src="assets/Resume%20(Sebastian%20Tagalog).pdf" title="Sebastian Lucas Tagalog résumé PDF">
+      <p>Your browser can’t display this PDF. <a href="assets/Resume%20(Sebastian%20Tagalog).pdf" download="Resume (Sebastian Tagalog).pdf">Download the résumé PDF</a>.</p>
+    </iframe>
+  </main>
 </body>
 </html>
