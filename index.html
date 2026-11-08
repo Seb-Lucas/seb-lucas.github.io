@@ -151,116 +151,203 @@
     <section class="section container projects-section" id="projects" aria-labelledby="projects-title">
       <div class="section-heading projects-heading">
         <div>
-          <h2 id="projects-title">Featured Projects</h2>
+          <h2 id="projects-title">Selected Projects</h2>
+          <p class="projects-intro">A closer look at software products and connected hardware systems I’ve designed and built.</p>
         </div>
-        <p class="section-note">Selected academic and engineering work</p>
+        <p class="section-note">Project index / 04</p>
       </div>
 
-      <div class="project-grid">
-        <article class="project-card" data-project>
-          <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-neurovia">
-            <div class="project-preview preview-neurovia" aria-hidden="true">
-              <div class="signal-line"><span>RFID</span><b>→</b><span>ESP32</span><b>→</b><span>Data Analytics Web Dashboard</span></div>
-              <div class="signal-readout"><span>INPUT</span><strong>TAG DETECTED</strong><span>OUTPUT</span></div>
-            </div>
-            <div class="project-title-row">
-              <h3>Neurovia</h3>
-              <div class="tags"><span>IoT</span><span>Embedded</span><span>RFID</span></div>
-            </div>
-            <p class="project-pitch">An IoT-enabled tangible system designed to support cognitive and motor rehabilitation for elderly users.</p>
-            <span class="expand-hint"><span aria-hidden="true">▸</span> View technical details</span>
-          </button>
-          <a class="project-explore" href="project-neurovia.html">Explore project <span aria-hidden="true">↗</span></a>
-          <div class="project-details" id="project-neurovia" hidden>
-            <div class="architecture-panel">
-              <div class="architecture-intro"><span class="eyebrow">System architecture / 02</span><p data-architecture-description>Trace the path from tangible input to a useful interface. Select a component to inspect its role.</p></div>
-              <div class="architecture-flow" role="list" aria-label="Neurovia system architecture">
-                <button type="button" role="listitem" class="architecture-node is-selected" data-architecture="RFID"><span>01</span><strong>RFID</strong><small>tangible input</small></button><span class="architecture-arrow" aria-hidden="true">↓</span><button type="button" role="listitem" class="architecture-node" data-architecture="ESP32"><span>02</span><strong>ESP32-S3</strong><small>device control</small></button><span class="architecture-arrow" aria-hidden="true">↓</span><button type="button" role="listitem" class="architecture-node" data-architecture="Dashboard"><span>04</span><strong>Dashboard</strong><small>system feedback</small></button>
+      <nav class="project-browse" aria-label="Browse projects by focus">
+        <a class="project-browse-link" href="#software-projects">
+          <span class="project-browse-index">01</span>
+          <span><strong>Software focus</strong><small>Web experiences and applications</small></span>
+          <span class="project-browse-count">02 projects</span>
+          <span class="project-browse-arrow" aria-hidden="true">↓</span>
+        </a>
+        <a class="project-browse-link" href="#hardware-projects">
+          <span class="project-browse-index">02</span>
+          <span><strong>Hardware focus</strong><small>Embedded systems and automation</small></span>
+          <span class="project-browse-count">02 projects</span>
+          <span class="project-browse-arrow" aria-hidden="true">↓</span>
+        </a>
+      </nav>
+
+      <section class="project-focus project-focus-software" id="software-projects" aria-labelledby="software-projects-title">
+        <div class="project-focus-heading">
+          <p class="eyebrow">Focus / 01</p>
+          <div>
+            <h3 id="software-projects-title">Software-focused projects</h3>
+            <p>Thoughtful interfaces and application flows, from a full-stack storefront to clinical appointment booking.</p>
+          </div>
+          <span class="project-focus-count">01—02</span>
+        </div>
+
+        <div class="project-grid">
+          <p class="project-carousel-status" aria-live="polite" aria-atomic="true"></p>
+          <article class="project-card project-card-high-velocity" id="project-card-high-velocity" data-project>
+            <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-high-velocity">
+              <div class="project-preview preview-storefront" aria-hidden="true">
+                <span class="preview-kicker">HIGH VELOCITY / STOREFRONT</span>
+                <div class="storefront-preview">
+                  <span class="storefront-sidebar">COLLECTION<br>01 / 04</span>
+                  <div class="storefront-products"><i></i><i></i><i></i></div>
+                  <span class="storefront-cart">BAG <b>02</b></span>
+                </div>
+                <span class="preview-caption">Browse / Select / Demo cart</span>
               </div>
+              <div class="project-title-row">
+                <h4>High Velocity</h4>
+                <div class="tags"><span>React</span><span>Storefront</span><span>Full-stack</span></div>
+              </div>
+              <p class="project-pitch">A responsive storefront demo with an editorial product catalog, guest account, and session-based cart.</p>
+              <span class="expand-hint"><span aria-hidden="true">▸</span> View technical details</span>
+            </button>
+            <div class="project-actions">
+              <a class="project-explore" href="https://high-velocity.onrender.com/" target="_blank" rel="noreferrer">Open live demo <span aria-hidden="true">↗</span></a>
             </div>
-            <dl>
-              <div><dt>Problem</dt><dd>Older adults can benefit from rehabilitation activities that combine physical interaction with cognitive tasks, but many activities are difficult to track consistently.</dd></div>
-              <div><dt>Approach</dt><dd>Built a tangible rehabilitation platform using 12 RFID-tagged tangible shapes, four RFID readers, a ESP32 Microcontroller, and Data Analytics therapist-facing web dashboard.</dd></div>
-              <div><dt>Result</dt><dd>Produced a functional prototype that records interaction and session performance for review, supporting structured cognitive and motor training activities.</dd></div>
-            </dl>
-          </div>
-        </article>
+            <nav class="project-sequence" aria-label="Browse software projects">
+              <span class="project-sequence-position">Project 01 / 02</span>
+              <div class="project-sequence-controls">
+                <span class="project-sequence-disabled" aria-disabled="true" aria-label="No previous project">← Previous</span>
+                <a class="project-sequence-link" href="#project-card-clinical-booking" aria-label="Next project: Clinical Booking System">Next <span aria-hidden="true">→</span></a>
+              </div>
+            </nav>
+            <div class="project-details" id="project-high-velocity" hidden>
+              <dl>
+                <div><dt>Problem</dt><dd>A storefront portfolio demo should make product browsing and cart interactions easy to explore without implying that real purchases are available.</dd></div>
+                <div><dt>Approach</dt><dd>Built a responsive React storefront backed by Express and tRPC, with a sample catalog, guest account view, and session-based cart.</dd></div>
+                <div><dt>Result</dt><dd>Delivered an interactive public demo. Checkout does not create orders, collect payment, or redirect to a commerce provider.</dd></div>
+              </dl>
+            </div>
+          </article>
 
-        <article class="project-card" data-project>
-          <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-booking">
-            <div class="project-preview preview-booking" aria-hidden="true">
-              <div class="booking-row"><span>09:00</span><i></i><span>Available</span></div>
-              <div class="booking-row"><span>10:30</span><i></i><span>Reserved</span></div>
-              <div class="booking-row"><span>13:00</span><i></i><span>Available</span></div>
+          <article class="project-card" id="project-card-clinical-booking" data-project>
+            <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-booking">
+              <div class="project-preview preview-booking" aria-hidden="true">
+                <span class="preview-kicker">AURELIA / APPOINTMENTS</span>
+                <div class="booking-preview-window">
+                  <div class="booking-preview-heading"><span>Choose a time</span><span>SELECT A DATE</span></div>
+                  <div class="booking-row"><span>09:00</span><i></i><span>Available</span></div>
+                  <div class="booking-row"><span>10:30</span><i></i><span>Reserved</span></div>
+                  <div class="booking-row"><span>13:00</span><i></i><span>Available</span></div>
+                </div>
+              </div>
+              <div class="project-title-row">
+                <h4>Clinical Booking System</h4>
+                <div class="tags"><span>Web</span><span>UI</span></div>
+              </div>
+              <p class="project-pitch">A booking-oriented web prototype that makes appointment discovery, time-slot selection, and confirmation easy to follow.</p>
+              <span class="expand-hint"><span aria-hidden="true">▸</span> View technical details</span>
+            </button>
+            <div class="project-actions">
+              <a class="project-explore" href="project-clinical-booking.html">Project details <span aria-hidden="true">↗</span></a>
+              <a class="project-explore" href="https://aurelia-clinic-appointment-system.onrender.com/" target="_blank" rel="noreferrer">Live demo <span aria-hidden="true">↗</span></a>
             </div>
-            <div class="project-title-row">
-              <h3>Clinical Booking System</h3>
-              <div class="tags"><span>Web</span><span>UI</span></div>
+            <nav class="project-sequence" aria-label="Browse software projects">
+              <span class="project-sequence-position">Project 02 / 02</span>
+              <div class="project-sequence-controls">
+                <a class="project-sequence-link" href="#project-card-high-velocity" aria-label="Previous project: High Velocity"><span aria-hidden="true">←</span> Previous</a>
+                <span class="project-sequence-disabled" aria-disabled="true" aria-label="No next project">Next →</span>
+              </div>
+            </nav>
+            <div class="project-details" id="project-booking" hidden>
+              <dl>
+                <div><dt>Problem</dt><dd>Appointment scheduling benefits from a clear workflow that reduces ambiguity around available time slots and booking information.</dd></div>
+                <div><dt>Approach</dt><dd>Designed a responsive interface around appointment discovery, selection, and confirmation, keeping the user flow direct and easy to scan.</dd></div>
+                <div><dt>Result</dt><dd>Created a usable booking-oriented web prototype with a clear scheduling flow and responsive presentation.</dd></div>
+              </dl>
             </div>
-            <p class="project-pitch">A practical booking workflow focused on organizing appointments and improving access to clinical scheduling.</p>
-            <span class="expand-hint"><span aria-hidden="true">▸</span> View technical details</span>
-          </button>
-          <a class="project-explore" href="project-clinical-booking.html">Explore project <span aria-hidden="true">↗</span></a>
-          <a class="project-explore" href="https://aurelia-clinic-appointment-system.onrender.com/" target="_blank" rel="noreferrer">Open live demo <span aria-hidden="true">↗</span></a>
-          <div class="project-details" id="project-booking" hidden>
-            <dl>
-              <div><dt>Problem</dt><dd>Appointment scheduling benefits from a clear workflow that reduces ambiguity around available time slots and booking information.</dd></div>
-              <div><dt>Approach</dt><dd>Designed a responsive interface around appointment discovery, selection, and confirmation, keeping the user flow direct and easy to scan.</dd></div>
-              <div><dt>Result</dt><dd>Created a usable booking-oriented web prototype with a clear scheduling flow and responsive presentation.</dd></div>
-            </dl>
-          </div>
-        </article>
+          </article>
+        </div>
+      </section>
 
-        <article class="project-card" data-project>
-          <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-automation">
-            <div class="project-preview preview-automation" aria-hidden="true">
-              <div class="automation-flow"><span>SENSOR</span><b>→</b><span>LOGIC</span><b>→</b><span>ACTION</span></div>
-              <pre aria-hidden="true">$ system.run()
+      <section class="project-focus project-focus-hardware" id="hardware-projects" aria-labelledby="hardware-projects-title">
+        <div class="project-focus-heading">
+          <p class="eyebrow">Focus / 02</p>
+          <div>
+            <h3 id="hardware-projects-title">Hardware-focused projects</h3>
+            <p>Physical inputs, embedded control, connected devices, and the software that helps those systems communicate.</p>
+          </div>
+          <span class="project-focus-count">03—04</span>
+        </div>
+
+        <div class="project-grid">
+          <p class="project-carousel-status" aria-live="polite" aria-atomic="true"></p>
+          <article class="project-card" id="project-card-neurovia" data-project>
+            <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-neurovia">
+              <div class="project-preview preview-neurovia" aria-hidden="true">
+                <span class="preview-kicker">NEUROVIA / CONNECTED REHABILITATION</span>
+                <div class="signal-line"><span>RFID</span><b>→</b><span>ESP32-S3</span><b>→</b><span>Dashboard</span></div>
+                <div class="signal-readout"><span>PHYSICAL INPUT</span><strong>TAG DETECTED</strong><span>SESSION DATA</span></div>
+              </div>
+              <div class="project-title-row">
+                <h4>Neurovia</h4>
+                <div class="tags"><span>IoT</span><span>Embedded</span><span>RFID</span></div>
+              </div>
+              <p class="project-pitch">An IoT-enabled tangible rehabilitation system connecting RFID interaction, embedded hardware, and therapist-facing data analytics.</p>
+              <span class="expand-hint"><span aria-hidden="true">▸</span> View system details</span>
+            </button>
+            <div class="project-actions">
+              <a class="project-explore" href="project-neurovia.html">Project details <span aria-hidden="true">↗</span></a>
+            </div>
+            <nav class="project-sequence" aria-label="Browse hardware projects">
+              <span class="project-sequence-position">Project 01 / 02</span>
+              <div class="project-sequence-controls">
+                <span class="project-sequence-disabled" aria-disabled="true" aria-label="No previous project">← Previous</span>
+                <a class="project-sequence-link" href="#project-card-automation" aria-label="Next project: Engineering Automation Projects">Next <span aria-hidden="true">→</span></a>
+              </div>
+            </nav>
+            <div class="project-details" id="project-neurovia" hidden>
+              <div class="architecture-panel">
+                <div class="architecture-intro"><span class="eyebrow">System architecture / 02</span><p data-architecture-description>Trace the path from tangible input to a useful interface. Select a component to inspect its role.</p></div>
+                <div class="architecture-flow" role="list" aria-label="Neurovia system architecture">
+                  <button type="button" role="listitem" class="architecture-node is-selected" data-architecture="RFID"><span>01</span><strong>RFID</strong><small>tangible input</small></button><span class="architecture-arrow" aria-hidden="true">↓</span><button type="button" role="listitem" class="architecture-node" data-architecture="ESP32"><span>02</span><strong>ESP32-S3</strong><small>device control</small></button><span class="architecture-arrow" aria-hidden="true">↓</span><button type="button" role="listitem" class="architecture-node" data-architecture="Dashboard"><span>04</span><strong>Dashboard</strong><small>system feedback</small></button>
+                </div>
+              </div>
+              <dl>
+                <div><dt>Problem</dt><dd>Older adults can benefit from rehabilitation activities that combine physical interaction with cognitive tasks, but many activities are difficult to track consistently.</dd></div>
+                <div><dt>Approach</dt><dd>Built a tangible rehabilitation platform using 12 RFID-tagged tangible shapes, four RFID readers, a ESP32 Microcontroller, and Data Analytics therapist-facing web dashboard.</dd></div>
+                <div><dt>Result</dt><dd>Produced a functional prototype that records interaction and session performance for review, supporting structured cognitive and motor training activities.</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="project-card" id="project-card-automation" data-project>
+            <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-automation">
+              <div class="project-preview preview-automation" aria-hidden="true">
+                <span class="preview-kicker">ENGINEERING / AUTOMATION</span>
+                <div class="automation-flow"><span>SENSOR</span><b>→</b><span>LOGIC</span><b>→</b><span>ACTION</span></div>
+                <pre aria-hidden="true">$ system.run()
 status: connected
 cycle: automated</pre>
+              </div>
+              <div class="project-title-row">
+                <h4>Engineering Automation Projects</h4>
+                <div class="tags"><span>Automation</span><span>IoT</span><span>Systems</span></div>
+              </div>
+              <p class="project-pitch">Hands-on engineering work exploring sensing, embedded control, connected technologies, and system integration.</p>
+              <span class="expand-hint"><span aria-hidden="true">▸</span> View technical details</span>
+            </button>
+            <div class="project-actions">
+              <a class="project-explore" href="project-automation.html">Project details <span aria-hidden="true">↗</span></a>
             </div>
-            <div class="project-title-row">
-              <h3>Engineering Automation Projects</h3>
-              <div class="tags"><span>Automation</span><span>IoT</span><span>Systems</span></div>
+            <nav class="project-sequence" aria-label="Browse hardware projects">
+              <span class="project-sequence-position">Project 02 / 02</span>
+              <div class="project-sequence-controls">
+                <a class="project-sequence-link" href="#project-card-neurovia" aria-label="Previous project: Neurovia"><span aria-hidden="true">←</span> Previous</a>
+                <span class="project-sequence-disabled" aria-disabled="true" aria-label="No next project">Next →</span>
+              </div>
+            </nav>
+            <div class="project-details" id="project-automation" hidden>
+              <dl>
+                <div><dt>Problem</dt><dd>Repetitive technical workflows often require dependable sensing, control logic, and clear feedback between system components.</dd></div>
+                <div><dt>Approach</dt><dd>Worked across microcontrollers, sensors, connectivity, testing, troubleshooting, and documentation to connect individual components into working prototypes.</dd></div>
+                <div><dt>Result</dt><dd>Built practical prototype workflows that strengthened experience in hardware–software integration and engineering validation.</dd></div>
+              </dl>
             </div>
-            <p class="project-pitch">Hands-on engineering work exploring automation, embedded systems, connected technologies, and system integration.</p>
-            <span class="expand-hint"><span aria-hidden="true">▸</span> View technical details</span>
-          </button>
-          <a class="project-explore" href="project-automation.html">Explore project <span aria-hidden="true">↗</span></a>
-          <div class="project-details" id="project-automation" hidden>
-            <dl>
-              <div><dt>Problem</dt><dd>Repetitive technical workflows often require dependable sensing, control logic, and clear feedback between system components.</dd></div>
-              <div><dt>Approach</dt><dd>Worked across microcontrollers, sensors, connectivity, testing, troubleshooting, and documentation to connect individual components into working prototypes.</dd></div>
-              <div><dt>Result</dt><dd>Built practical prototype workflows that strengthened experience in hardware–software integration and engineering validation.</dd></div>
-            </dl>
-          </div>
-        </article>
-
-        <article class="project-card project-card-high-velocity" data-project>
-          <button class="project-summary" type="button" aria-expanded="false" aria-controls="project-high-velocity">
-            <div class="project-preview preview-automation" aria-hidden="true">
-              <div class="automation-flow"><span>DISCOVER</span><b>→</b><span>SELECT</span><b>→</b><span>DEMO CART</span></div>
-              <pre aria-hidden="true">$ storefront.status()
-catalog: ready
-checkout: demo only</pre>
-            </div>
-            <div class="project-title-row">
-              <h3>High Velocity</h3>
-              <div class="tags"><span>React</span><span>Storefront</span><span>Full-stack</span></div>
-            </div>
-            <p class="project-pitch">A responsive full-stack storefront demo featuring an editorial product catalog, guest account, and session-based cart.</p>
-            <span class="expand-hint"><span aria-hidden="true">▸</span> View technical details</span>
-          </button>
-          <a class="project-explore" href="https://high-velocity.onrender.com/" target="_blank" rel="noreferrer">Open live demo <span aria-hidden="true">↗</span></a>
-          <div class="project-details" id="project-high-velocity" hidden>
-            <dl>
-              <div><dt>Problem</dt><dd>A storefront portfolio demo should make product browsing and cart interactions easy to explore without implying that real purchases are available.</dd></div>
-              <div><dt>Approach</dt><dd>Built a responsive React storefront backed by Express and tRPC, with a sample catalog, guest account view, and session-based cart.</dd></div>
-              <div><dt>Result</dt><dd>Delivered an interactive public demo. Checkout does not create orders, collect payment, or redirect to a commerce provider.</dd></div>
-            </dl>
-          </div>
-        </article>
-      </div>
+          </article>
+        </div>
+      </section>
     </section>
 
     <section class="section container experience-section" id="experience" aria-labelledby="experience-title">

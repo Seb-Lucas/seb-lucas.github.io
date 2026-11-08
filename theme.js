@@ -331,6 +331,7 @@
         const opening = trigger.getAttribute("aria-expanded") !== "true";
         trigger.setAttribute("aria-expanded", String(opening));
         if (opening) {
+          card.classList.add("is-expanded");
           details.hidden = false;
           if (!reducedMotion) {
             details.animate(
@@ -344,11 +345,103 @@
               [{ opacity: 1, height: `${details.scrollHeight}px` }, { opacity: 0, height: "0px" }],
               { duration: 250, easing: "ease-out" }
             );
-            animation.addEventListener("finish", () => { details.hidden = true; });
+            animation.addEventListener("finish", () => {
+              details.hidden = true;
+              card.classList.remove("is-expanded");
+            });
           } else {
             details.hidden = true;
+            card.classList.remove("is-expanded");
           }
         }
+      });
+    });
+
+    document.querySelectorAll(".project-grid").forEach((carousel) => {
+      const cards = Array.from(carousel.querySelectorAll("[data-project]"));
+      const status = carousel.querySelector(".project-carousel-status");
+      if (cards.length < 2 || !status) return;
+
+      const requestedIndex = cards.findIndex((card) => card.id === location.hash.slice(1));
+      let activeIndex = requestedIndex >= 0 ? requestedIndex : 0;
+      let isTransitioning = false;
+      const setActiveCard = (card, active) => {
+        card.classList.toggle("is-active", active);
+        card.inert = !active;
+        card.setAttribute("aria-hidden", String(!active));
+      };
+      const announceCard = (index) => {
+        const title = cards[index].querySelector(".project-title-row h4").textContent.trim();
+        status.textContent = `Project ${index + 1} of ${cards.length}: ${title}`;
+      };
+
+      carousel.classList.add("is-carousel");
+      cards.forEach((card, index) => setActiveCard(card, index === activeIndex));
+      announceCard(activeIndex);
+
+      carousel.addEventListener("click", (event) => {
+        const link = event.target.closest(".project-sequence-link");
+        if (!link || !carousel.contains(link)) return;
+
+        const target = document.getElementById(link.hash.slice(1));
+        const nextIndex = cards.indexOf(target);
+        if (nextIndex < 0 || nextIndex === activeIndex || isTransitioning) {
+          event.preventDefault();
+          return;
+        }
+
+        event.preventDefault();
+        const outgoing = cards[activeIndex];
+        const incoming = cards[nextIndex];
+        const direction = nextIndex > activeIndex ? 1 : -1;
+        isTransitioning = true;
+
+        const outgoingTrigger = outgoing.querySelector(".project-summary");
+        outgoingTrigger.setAttribute("aria-expanded", "false");
+        outgoing.classList.remove("is-expanded");
+        outgoing.querySelector(".project-details").hidden = true;
+        incoming.inert = false;
+        incoming.setAttribute("aria-hidden", "false");
+        incoming.classList.add("is-entering");
+        incoming.style.setProperty("--project-enter-offset", `${direction * 18}px`);
+        outgoing.classList.add("is-exiting");
+        outgoing.style.setProperty("--project-exit-offset", `${direction * -18}px`);
+
+        const finishTransition = () => {
+          if (!isTransitioning) return;
+          const reverseLink = incoming.querySelector(`.project-sequence-link[href="#${outgoing.id}"]`);
+          outgoing.classList.remove("is-active", "is-exiting");
+          outgoing.inert = true;
+          outgoing.setAttribute("aria-hidden", "true");
+          outgoing.style.removeProperty("--project-exit-offset");
+          incoming.classList.remove("is-entering", "is-entered");
+          incoming.classList.add("is-active");
+          incoming.style.removeProperty("--project-enter-offset");
+          activeIndex = nextIndex;
+          reverseLink?.focus({ preventScroll: true });
+          isTransitioning = false;
+          history.replaceState(null, "", `#${incoming.id}`);
+          announceCard(activeIndex);
+        };
+
+        if (reducedMotion) {
+          finishTransition();
+          return;
+        }
+
+        requestAnimationFrame(() => incoming.classList.add("is-entered"));
+        const onTransitionEnd = (transitionEvent) => {
+          if (transitionEvent.target === incoming && transitionEvent.propertyName === "transform") {
+            incoming.removeEventListener("transitionend", onTransitionEnd);
+            window.clearTimeout(fallbackTimer);
+            finishTransition();
+          }
+        };
+        incoming.addEventListener("transitionend", onTransitionEnd);
+        const fallbackTimer = window.setTimeout(() => {
+          incoming.removeEventListener("transitionend", onTransitionEnd);
+          finishTransition();
+        }, 850);
       });
     });
 
