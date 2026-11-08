@@ -220,16 +220,16 @@ html.dark .theme-icon::before { content: "☾"; }
 .projects-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; }
 .projects-intro { max-width: 62ch; margin: 14px 0 0; color: var(--muted); font-size: 17px; }
 .section-note { margin: 0; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 13px; }
-.project-browse { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 80px; }
+.project-browse { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0 0 64px; }
 .project-browse-link {
   display: grid; grid-template-columns: minmax(0, 1fr); align-items: center;
-  min-width: 0; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px;
+  min-width: 0; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px;
   background: var(--surface); transition: border-color .2s ease;
 }
 .project-browse-link:hover { border-color: var(--accent); }
 .project-browse-link strong, .project-browse-link small { display: block; }
-.project-browse-link strong { font-size: 14px; font-weight: 500; }
-.project-browse-link small { margin-top: 3px; color: var(--muted); font-size: 12px; }
+.project-browse-link strong { font-size: 13px; font-weight: 500; }
+.project-browse-link small { margin-top: 2px; color: var(--muted); font-size: 11px; }
 .project-focus { scroll-margin-top: 92px; }
 .project-focus + .project-focus { margin-top: 88px; padding-top: 64px; border-top: 1px solid var(--line); }
 .project-focus-heading { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; margin-bottom: 28px; }
@@ -564,8 +564,8 @@ html.has-scroll-reveal .scroll-reveal.is-revealed { opacity: 1; translate: 0 0; 
   .projects-heading { display: block; }
   .projects-intro { font-size: 15px; }
   .section-note { margin-top: 10px; }
-  .project-browse { grid-template-columns: 1fr; gap: 10px; margin-bottom: 56px; }
-  .project-browse-link { padding: 15px 16px; }
+  .project-browse { grid-template-columns: 1fr; gap: 8px; margin-bottom: 48px; }
+  .project-browse-link { padding: 10px 14px; }
   .project-focus + .project-focus { margin-top: 64px; padding-top: 48px; }
   .project-focus-heading { margin-bottom: 20px; }
   .project-focus-heading h3 { font-size: 23px; }
