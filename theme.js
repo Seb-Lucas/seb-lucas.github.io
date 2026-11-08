@@ -311,8 +311,6 @@
       const resetPointerState = () => {
         card.style.removeProperty("--pointer-x");
         card.style.removeProperty("--pointer-y");
-        card.style.removeProperty("--tilt-x");
-        card.style.removeProperty("--tilt-y");
       };
       if (!reducedMotion) {
         card.addEventListener("pointermove", (event) => {
@@ -322,8 +320,6 @@
           const y = (event.clientY - bounds.top) / bounds.height;
           card.style.setProperty("--pointer-x", `${x * 100}%`);
           card.style.setProperty("--pointer-y", `${y * 100}%`);
-          card.style.setProperty("--tilt-x", `${(x - 0.5) * 2.4}deg`);
-          card.style.setProperty("--tilt-y", `${(0.5 - y) * 1.8}deg`);
         });
         card.addEventListener("pointerleave", resetPointerState);
       }

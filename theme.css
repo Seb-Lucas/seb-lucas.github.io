@@ -215,25 +215,19 @@ html.dark .theme-icon::before { content: "☾"; }
 .section-note { margin: 0; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 13px; }
 .project-browse { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 80px; }
 .project-browse-link {
-  display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 14px;
+  display: grid; grid-template-columns: minmax(0, 1fr); align-items: center;
   min-width: 0; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px;
-  background: var(--surface); transition: border-color .2s ease, transform .2s ease;
+  background: var(--surface); transition: border-color .2s ease;
 }
-.project-browse-link:hover { border-color: var(--accent); transform: translateY(-2px); }
-.project-browse-index, .project-focus-count { color: var(--accent); font: 11px "JetBrains Mono", monospace; }
+.project-browse-link:hover { border-color: var(--accent); }
 .project-browse-link strong, .project-browse-link small { display: block; }
 .project-browse-link strong { font-size: 14px; font-weight: 500; }
 .project-browse-link small { margin-top: 3px; color: var(--muted); font-size: 12px; }
-.project-browse-count { color: var(--muted); font: 10px "JetBrains Mono", monospace; white-space: nowrap; }
-.project-browse-arrow { color: var(--accent); transition: transform .2s ease; }
-.project-browse-link:hover .project-browse-arrow { transform: translateY(3px); }
 .project-focus { scroll-margin-top: 92px; }
 .project-focus + .project-focus { margin-top: 88px; padding-top: 64px; border-top: 1px solid var(--line); }
-.project-focus-heading { display: grid; grid-template-columns: 150px 1fr auto; align-items: start; gap: 24px; margin-bottom: 28px; }
-.project-focus-heading .eyebrow { margin: 5px 0 0; }
+.project-focus-heading { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; margin-bottom: 28px; }
 .project-focus-heading h3 { margin: 0; font-size: 26px; line-height: 1.2; letter-spacing: -.025em; font-weight: 600; }
 .project-focus-heading p:not(.eyebrow) { max-width: 64ch; margin: 8px 0 0; color: var(--muted); font-size: 14px; }
-.project-focus-count { padding-top: 7px; color: var(--muted); }
 .project-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: stretch; }
 .project-carousel-status:not(:empty) {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -276,25 +270,23 @@ html.dark .theme-icon::before { content: "☾"; }
   display: flex;
   flex-direction: column;
   min-width: 0;
-  height: 350px;
+  height: 390px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--project-glow) 3%, transparent), transparent 48%), var(--surface);
   overflow: hidden;
   scroll-margin-top: 96px;
-  transition: transform .45s var(--ease), border-color .45s ease, background .45s ease, box-shadow .45s ease;
+  transition: border-color .45s ease, background .45s ease, box-shadow .45s ease;
 }
 .project-focus-software .project-card:nth-child(1) { --project-glow: #5369B3; }
 .project-focus-software .project-card:nth-child(2) { --project-glow: #168A86; }
 .project-focus-hardware .project-card:nth-child(1) { --project-glow: #B56A2A; }
 .project-focus-hardware .project-card:nth-child(2) { --project-glow: #527E76; }
-.project-card.is-expanded { height: auto; min-height: 350px; }
+.project-card.is-expanded { height: auto; min-height: 390px; }
 .project-card:is(:hover, :focus-within) {
   border-color: color-mix(in srgb, var(--project-glow) 52%, var(--line));
   background: radial-gradient(circle at var(--pointer-x, 88%) var(--pointer-y, 0%), color-mix(in srgb, var(--project-glow) var(--interactive-glow-strength), transparent), transparent 52%), var(--interactive-surface);
   box-shadow: 0 14px 34px color-mix(in srgb, var(--interactive-shadow) 100%, transparent);
-  transform: perspective(900px) translateY(-3px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
-  will-change: transform, background;
 }
 .project-summary {
   display: grid;
@@ -326,8 +318,6 @@ html.dark .theme-icon::before { content: "☾"; }
   box-shadow: 0 0 0 22px color-mix(in srgb, var(--project-glow) 3%, transparent), 0 0 0 44px color-mix(in srgb, var(--project-glow) 2%, transparent);
   pointer-events: none;
 }
-.preview-kicker, .preview-caption { color: var(--muted); font: 9px "JetBrains Mono", monospace; letter-spacing: .08em; }
-.preview-caption { align-self: flex-end; letter-spacing: .02em; text-transform: uppercase; }
 .project-card:is(:hover, :focus-within) .project-preview {
   background: radial-gradient(ellipse at 82% 18%, color-mix(in srgb, var(--project-glow) 18%, transparent), transparent 52%), var(--paper);
   color: var(--ink);
@@ -369,30 +359,31 @@ html.dark .theme-icon::before { content: "☾"; }
 .tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 .tags span { border: 1px solid var(--line); padding: 3px 7px; font-size: 11px; color: var(--muted); border-radius: 2px; }
 .project-pitch { grid-column: 2; grid-row: 2; margin: 0; padding: 6px 24px; max-width: 72ch; color: var(--muted); }
-.expand-hint { grid-column: 2; grid-row: 3; display: block; padding: 10px 24px 14px; color: var(--ink); font: 13px "JetBrains Mono", monospace; }
-.project-summary:hover .expand-hint { color: var(--accent); }
+.expand-hint { grid-column: 2; grid-row: 3; display: block; padding: 10px 24px 14px; color: var(--muted); font: 12px "JetBrains Mono", monospace; }
 .project-explore {
   display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 8px 10px;
   border: 1px solid var(--ink); border-radius: var(--radius); font: 12px "JetBrains Mono", monospace;
 }
 .project-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding: 8px 24px 10px calc(45% + 24px); }
 .project-sequence {
-  display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  margin-left: 45%; padding: 10px 24px 14px; border-top: 1px solid var(--line);
+  display: flex; justify-content: center; align-items: center;
+  flex: 0 0 auto; margin-left: 0; padding: 10px 24px 20px; border-top: 1px solid var(--line);
 }
-.project-sequence-position { color: var(--muted); font: 10px "JetBrains Mono", monospace; white-space: nowrap; }
-.project-sequence-controls { display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
-.project-sequence-link, .project-sequence-disabled { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font: 11px "JetBrains Mono", monospace; white-space: nowrap; }
-.project-sequence-link { color: var(--ink); transition: color .2s ease; }
-.project-sequence-link:focus-visible { outline-offset: 4px; }
-.project-sequence-link span { color: var(--accent); transition: transform .2s var(--ease); }
-.project-sequence-link:hover { color: var(--accent); }
-.project-sequence-link[href*="high-velocity"]:hover span, .project-sequence-link[href*="neurovia"]:hover span { transform: translateX(-3px); }
-.project-sequence-link[href*="clinical-booking"]:hover span, .project-sequence-link[href*="automation"]:hover span { transform: translateX(3px); }
-.project-sequence-disabled { color: var(--muted); opacity: .48; }
-.project-explore span { transition: transform .2s var(--ease); }
+.project-sequence-link {
+  display: inline-grid; flex: 0 0 48px; place-items: center;
+  width: 48px; height: 48px; aspect-ratio: 1; box-sizing: border-box;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: var(--paper); color: var(--accent);
+  box-shadow: var(--shadow-raised);
+  transition: color .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.project-sequence-link span { font: 24px/1 Arial, sans-serif; }
+.project-sequence-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.project-sequence-link:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: var(--surface); color: var(--ink); box-shadow: var(--shadow-raised-hover);
+}
 .project-explore:hover { border-color: var(--accent); color: var(--accent); }
-.project-explore:hover span { transform: translate(2px, -2px); }
 .project-details { padding: 0 24px 26px; }
 .project-details[hidden] { display: none; }
 .project-details dl { margin: 0; border-top: 1px solid var(--line); }
@@ -562,15 +553,11 @@ html.has-scroll-reveal .scroll-reveal.is-revealed { opacity: 1; translate: 0 0; 
   .projects-intro { font-size: 15px; }
   .section-note { margin-top: 10px; }
   .project-browse { grid-template-columns: 1fr; gap: 10px; margin-bottom: 56px; }
-  .project-browse-link { grid-template-columns: auto 1fr auto; padding: 15px 16px; }
-  .project-browse-count { grid-column: 2; grid-row: 2; }
-  .project-browse-arrow { grid-column: 3; grid-row: 1 / span 2; }
+  .project-browse-link { padding: 15px 16px; }
   .project-focus + .project-focus { margin-top: 64px; padding-top: 48px; }
-  .project-focus-heading { grid-template-columns: 1fr auto; gap: 8px 16px; margin-bottom: 20px; }
-  .project-focus-heading .eyebrow { grid-column: 1 / -1; margin: 0; }
+  .project-focus-heading { margin-bottom: 20px; }
   .project-focus-heading h3 { font-size: 23px; }
   .project-focus-heading p:not(.eyebrow) { font-size: 13px; }
-  .project-focus-count { grid-column: 2; grid-row: 2; }
   .project-grid { gap: 18px; }
   .project-grid.is-carousel { width: 100%; }
   .project-card { height: 480px; }
@@ -582,9 +569,7 @@ html.has-scroll-reveal .scroll-reveal.is-revealed { opacity: 1; translate: 0 0; 
   .project-pitch { grid-column: 1; grid-row: 3; padding: 4px 18px 10px; }
   .expand-hint { grid-column: 1; grid-row: 4; padding: 8px 18px 12px; }
   .project-actions { gap: 8px; margin-top: 0; padding: 6px 18px 10px; }
-  .project-sequence { margin-left: 0; padding: 10px 18px 12px; }
-  .project-sequence-controls { gap: 10px; }
-  .project-sequence-link, .project-sequence-disabled { font-size: 10px; }
+  .project-sequence { margin-left: 0; padding: 10px 18px 18px; }
   .project-detail-hero { padding: 24px 0 56px; }
   .project-back-link { margin-bottom: 48px; }
   .project-detail-hero h1 { font-size: 38px; }
