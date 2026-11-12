@@ -24,6 +24,166 @@
   applyTheme(getInitialTheme());
 
   document.addEventListener("DOMContentLoaded", () => {
+    if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {
+      const idleCat = document.createElement("div");
+      idleCat.className = "idle-cat";
+      idleCat.setAttribute("aria-hidden", "true");
+      idleCat.innerHTML = `
+        <svg viewBox="0 0 32 24" shape-rendering="crispEdges" focusable="false">
+          <g class="idle-cat-sprite">
+            <g class="idle-cat-tail">
+              <rect x="2" y="8" width="2" height="4" />
+              <rect x="4" y="6" width="2" height="4" />
+              <rect x="6" y="4" width="2" height="4" />
+              <rect x="8" y="6" width="2" height="4" />
+            </g>
+            <g class="idle-cat-body">
+              <rect class="idle-cat-fur" x="7" y="9" width="17" height="9" />
+              <rect class="idle-cat-fur" x="9" y="17" width="4" height="4" />
+              <rect class="idle-cat-fur" x="18" y="17" width="4" height="4" />
+            </g>
+            <g class="idle-cat-head-group">
+              <rect class="idle-cat-fur" x="19" y="5" width="11" height="11" />
+              <rect class="idle-cat-fur" x="19" y="2" width="4" height="5" />
+              <rect class="idle-cat-fur" x="26" y="2" width="4" height="5" />
+              <rect class="idle-cat-ear" x="20" y="4" width="2" height="2" />
+              <rect class="idle-cat-ear" x="27" y="4" width="2" height="2" />
+              <rect class="idle-cat-eye" x="23" y="9" width="2" height="2" />
+              <rect class="idle-cat-eye" x="28" y="9" width="2" height="2" />
+              <rect class="idle-cat-nose" x="29" y="12" width="2" height="2" />
+              <rect class="idle-cat-whisker" x="23" y="13" width="3" height="1" />
+              <rect class="idle-cat-whisker" x="27" y="14" width="3" height="1" />
+            </g>
+            <g class="idle-cat-reaching-paw">
+              <rect class="idle-cat-fur" x="22" y="14" width="4" height="3" />
+              <rect class="idle-cat-paw-tip" x="25" y="14" width="3" height="2" />
+            </g>
+          </g>
+        </svg>`;
+      const laserDot = document.createElement("span");
+      laserDot.className = "idle-cat-laser";
+      laserDot.setAttribute("aria-hidden", "true");
+      document.body.append(idleCat);
+      document.body.append(laserDot);
+
+      let idleTimer;
+      let escapeTimer;
+      let moodTimer;
+      let pointerX = 0;
+      let pointerY = 0;
+      let hasMousePosition = false;
+      const catMoods = ["playful", "curious", "pouncing", "stretching"];
+      let moodIndex = -1;
+
+      const hideCat = (event) => {
+        window.clearTimeout(idleTimer);
+        window.clearInterval(moodTimer);
+        if (!idleCat.classList.contains("is-visible") || idleCat.classList.contains("is-running-away")) return;
+
+        const catBounds = idleCat.getBoundingClientRect();
+        let escapeX = catBounds.left + catBounds.width / 2 - (event?.clientX ?? pointerX);
+        let escapeY = catBounds.top + catBounds.height / 2 - (event?.clientY ?? pointerY);
+        const distance = Math.hypot(escapeX, escapeY) || 1;
+        escapeX = Math.round((escapeX / distance) * 44);
+        escapeY = Math.round((escapeY / distance) * 30);
+        idleCat.style.setProperty("--escape-x", `${escapeX}px`);
+        idleCat.style.setProperty("--escape-y", `${escapeY}px`);
+        idleCat.style.setProperty("--escape-rotate", `${escapeX < 0 ? -12 : 12}deg`);
+        idleCat.classList.add("is-running-away");
+        laserDot.classList.remove("is-visible");
+        window.clearTimeout(escapeTimer);
+        escapeTimer = window.setTimeout(() => {
+          idleCat.classList.remove("is-visible", "is-running-away");
+          idleCat.style.removeProperty("--escape-x");
+          idleCat.style.removeProperty("--escape-y");
+          idleCat.style.removeProperty("--escape-rotate");
+        }, 380);
+      };
+      const moveLaserDot = () => {
+        const left = pointerX - 4;
+        const top = pointerY - 4;
+        laserDot.style.left = `${left}px`;
+        laserDot.style.top = `${top}px`;
+        const catBounds = idleCat.getBoundingClientRect();
+        const laserX = left + 4 - (catBounds.left + catBounds.width / 2);
+        const laserY = top + 4 - (catBounds.top + catBounds.height / 2);
+        const facingRight = laserX >= 0;
+        idleCat.style.setProperty("--facing-scale", facingRight ? "1" : "-1");
+        idleCat.dataset.facing = facingRight ? "right" : "left";
+        idleCat.style.setProperty("--leap-x", `${Math.round(Math.max(-12, Math.min(12, laserX * .3)))}px`);
+        idleCat.style.setProperty("--leap-y", `${Math.round(Math.max(-9, Math.min(9, laserY * .3)))}px`);
+        if (Math.abs(laserX) > Math.abs(laserY)) {
+          idleCat.dataset.look = laserX >= 0 ? "right" : "left";
+          idleCat.style.setProperty("--look-y", `${laserX >= 0 ? 13 : -13}deg`);
+          idleCat.style.setProperty("--look-x", `${laserY < 0 ? -4 : 4}deg`);
+        } else {
+          idleCat.dataset.look = laserY >= 0 ? "down" : "up";
+          idleCat.style.setProperty("--look-y", `${laserX < 0 ? -6 : 6}deg`);
+          idleCat.style.setProperty("--look-x", `${laserY >= 0 ? 12 : -12}deg`);
+        }
+      };
+      const showLaserPlay = () => {
+        moveLaserDot();
+        laserDot.classList.add("is-visible");
+      };
+      const advanceMood = () => {
+        moodIndex = (moodIndex + 1) % catMoods.length;
+        idleCat.dataset.mood = catMoods[moodIndex];
+      };
+      const scheduleCat = () => {
+        window.clearTimeout(idleTimer);
+        if (!hasMousePosition || document.hidden) return;
+        idleTimer = window.setTimeout(() => {
+          const insetX = idleCat.offsetWidth;
+          const insetY = idleCat.offsetHeight;
+          const catIsLeftOfCursor = pointerX >= insetX + 24;
+          const desiredLeft = catIsLeftOfCursor ? pointerX - insetX - 16 : pointerX + 16;
+          const left = Math.min(Math.max(desiredLeft, 8), window.innerWidth - insetX - 8);
+          const top = Math.min(Math.max(pointerY - insetY + 8, 8), window.innerHeight - insetY - 8);
+          idleCat.dataset.facing = catIsLeftOfCursor ? "right" : "left";
+          idleCat.style.setProperty("--facing-scale", catIsLeftOfCursor ? "1" : "-1");
+          idleCat.style.setProperty("--arrival-x", `${catIsLeftOfCursor ? -26 : 26}px`);
+          idleCat.style.left = `${left}px`;
+          idleCat.style.top = `${top}px`;
+          moodIndex = -1;
+          advanceMood();
+          idleCat.classList.add("is-visible");
+          idleCat.classList.remove("is-running-away");
+          window.clearInterval(moodTimer);
+          moodTimer = window.setInterval(advanceMood, 3600);
+          showLaserPlay();
+        }, 3000);
+      };
+
+      document.addEventListener("pointermove", (event) => {
+        if (event.pointerType !== "mouse") return;
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+        hasMousePosition = true;
+        hideCat(event);
+        scheduleCat();
+      }, { passive: true });
+
+      document.addEventListener("pointerdown", (event) => {
+        if (event.pointerType !== "mouse") return;
+        hideCat(event);
+        scheduleCat();
+      }, { passive: true });
+      document.addEventListener("wheel", () => {
+        hideCat();
+        scheduleCat();
+      }, { passive: true });
+      document.addEventListener("keydown", () => {
+        hideCat();
+        hasMousePosition = false;
+      });
+      document.addEventListener("visibilitychange", () => {
+        hideCat();
+        if (document.hidden) hasMousePosition = false;
+      });
+      window.addEventListener("blur", hideCat);
+    }
+
     if (!reducedMotion && "IntersectionObserver" in window) {
       const revealTargets = document.querySelectorAll(
         ".hero-layout, .section-heading, .about-grid, .skill-group, .project-card, .timeline-item, .certification-card, .contact-layout, .project-detail-hero > .container, .project-detail-block > .container, .resume-head, .resume > section"

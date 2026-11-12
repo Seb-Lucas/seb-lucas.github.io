@@ -103,6 +103,142 @@ code, .meta-row, .pill, .tags, .timeline-year, .signal-readout, .booking-row, .a
 .theme-icon::before { content: "☼"; font-size: 18px; }
 html.dark .theme-icon::before { content: "☾"; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.idle-cat {
+  position: fixed; z-index: 45; width: 48px; height: 36px;
+  pointer-events: none; user-select: none;
+  opacity: 0; visibility: hidden;
+  transform: translate(0, 0) scale(1);
+  image-rendering: pixelated;
+  filter: drop-shadow(2px 3px 0 color-mix(in srgb, var(--ink) 18%, transparent));
+  transition: left .3s cubic-bezier(.22, 1, .36, 1), top .3s cubic-bezier(.22, 1, .36, 1), opacity .16s ease, transform .38s cubic-bezier(.22, 1, .36, 1), visibility 0s linear .38s;
+}
+.idle-cat.is-visible {
+  opacity: 1; visibility: visible;
+  transition-delay: 0s;
+}
+.idle-cat.is-visible:not(.is-running-away) { animation: idle-cat-arrive .42s cubic-bezier(.2, .8, .25, 1.15) both; }
+.idle-cat.is-running-away {
+  opacity: 0; visibility: visible;
+  transform: translate(var(--escape-x), var(--escape-y)) rotate(var(--escape-rotate)) scale(.72);
+  transition-delay: 0s;
+}
+.idle-cat-laser {
+  position: fixed; z-index: 44; width: 8px; height: 8px;
+  border-radius: 50%; pointer-events: none; opacity: 0;
+  background: #ff3b55;
+  box-shadow: 0 0 0 3px rgba(255, 59, 85, .14), 0 0 12px 4px rgba(255, 59, 85, .52);
+  transform: scale(.5);
+  transition: opacity .16s ease, transform .2s ease;
+}
+.idle-cat-laser.is-visible { opacity: 1; transform: scale(1); animation: idle-cat-laser-pulse .8s ease-in-out infinite alternate; }
+.idle-cat svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.idle-cat-fur, .idle-cat-tail { fill: #17191F; }
+.idle-cat-ear { fill: #A95F70; }
+.idle-cat-eye { fill: #F1C75B; }
+.idle-cat-nose { fill: #D98A9D; }
+.idle-cat-whisker { fill: #E5E8ED; }
+.idle-cat-paw-tip { fill: #A95F70; }
+.idle-cat-sprite {
+  transform-box: fill-box; transform-origin: 55% 78%; transform-style: preserve-3d;
+  will-change: transform;
+  scale: var(--facing-scale, 1) 1;
+}
+.idle-cat-body {
+  transform-box: fill-box; transform-origin: 22% 55%;
+}
+.idle-cat-head-group {
+  transform-box: fill-box; transform-origin: 58% 76%;
+  transform: perspective(72px) rotateY(var(--look-y, 0deg)) rotateX(var(--look-x, 0deg));
+  transition: transform .24s cubic-bezier(.22, 1, .36, 1);
+}
+.idle-cat-reaching-paw {
+  transform-box: fill-box; transform-origin: 0 0;
+}
+.idle-cat.is-visible[data-mood="playful"] .idle-cat-sprite { animation: idle-cat-playful 2.4s cubic-bezier(.45, 0, .35, 1) infinite; }
+.idle-cat.is-visible[data-mood="curious"] .idle-cat-sprite { animation: idle-cat-curious 3.6s cubic-bezier(.45, 0, .35, 1) infinite; }
+.idle-cat.is-visible[data-mood="pouncing"] .idle-cat-sprite { animation: idle-cat-pounce 1.8s cubic-bezier(.32, .02, .25, 1) infinite; }
+.idle-cat.is-visible[data-mood="stretching"] .idle-cat-sprite { animation: idle-cat-stretch 3.8s cubic-bezier(.45, 0, .35, 1) infinite; }
+.idle-cat.is-visible.is-running-away .idle-cat-sprite { animation: idle-cat-run-cycle .18s ease-in-out infinite alternate; }
+.idle-cat.is-visible .idle-cat-reaching-paw { animation: idle-cat-paw-chase .82s ease-in-out infinite alternate; }
+.idle-cat.is-visible[data-mood="stretching"] .idle-cat-body { animation: idle-cat-body-stretch 3.8s cubic-bezier(.45, 0, .35, 1) infinite; }
+.idle-cat.is-visible[data-mood="stretching"] .idle-cat-reaching-paw { animation: idle-cat-full-stretch 3.8s cubic-bezier(.45, 0, .35, 1) infinite; }
+.idle-cat.is-visible[data-mood="stretching"] .idle-cat-tail { animation-duration: 1.8s; }
+.idle-cat.is-visible[data-look="up"] .idle-cat-reaching-paw { animation-delay: -.22s; }
+.idle-cat.is-visible[data-look="down"] .idle-cat-reaching-paw { animation-delay: -.58s; }
+.idle-cat.is-visible .idle-cat-tail {
+  transform-box: fill-box; transform-origin: 100% 70%;
+  animation: idle-cat-tail-play 1.15s ease-in-out infinite alternate;
+}
+.idle-cat.is-visible .idle-cat-eye {
+  transform-box: fill-box; transform-origin: center;
+  animation: idle-cat-blink 5.4s ease-in-out infinite;
+}
+@keyframes idle-cat-playful {
+  0%, 100% { transform: translate(0, 0) rotate(0) scale(1, 1); }
+  18% { transform: translate(0, 1px) rotate(-3deg) scale(1.04, .94); }
+  38% { transform: translate(0, -5px) rotate(3deg) scale(.98, 1.06); }
+  54% { transform: translate(1px, 0) rotate(0) scale(1.08, .88); }
+  72% { transform: translate(-1px, -2px) rotate(-2deg) scale(.98, 1.03); }
+}
+@keyframes idle-cat-arrive {
+  from { transform: translate(var(--arrival-x), 9px) scale(.72); }
+  72% { transform: translate(-2px, -2px) scale(1.06); }
+  to { transform: translate(0, 0) scale(1); }
+}
+@keyframes idle-cat-run-cycle {
+  from { transform: translateY(-1px) scaleY(1.08); }
+  to { transform: translateY(2px) scaleY(.88); }
+}
+@keyframes idle-cat-pounce {
+  0%, 12%, 100% { transform: perspective(88px) rotateY(0) rotateX(0) translate(0, 0) rotate(0) scale(1, 1); }
+  28% { transform: perspective(88px) rotateY(-12deg) rotateX(9deg) translate(1px, 2px) rotate(4deg) scale(1.12, .78); }
+  48% { transform: perspective(88px) rotateY(18deg) rotateX(-13deg) translate(calc(3px + var(--leap-x, 0px)), calc(-10px + var(--leap-y, 0px))) rotate(-7deg) scale(.88, 1.16); }
+  62% { transform: perspective(88px) rotateY(-10deg) rotateX(8deg) translate(calc(5px + var(--leap-x, 0px)), calc(-5px + var(--leap-y, 0px))) rotate(4deg) scale(1.12, .88); }
+  76% { transform: perspective(88px) rotateY(6deg) rotateX(-3deg) translate(1px, 1px) rotate(-2deg) scale(.96, 1.05); }
+  88% { transform: perspective(88px) rotateY(0) rotateX(0) translate(0, 0) rotate(0) scale(1.02, .98); }
+}
+@keyframes idle-cat-body-stretch {
+  0%, 100% { transform: scaleX(1) translateY(0); }
+  20% { transform: scaleX(1.02) translateY(1px); }
+  48%, 68% { transform: scaleX(1.24) translateY(0); }
+  84% { transform: scaleX(.96) translateY(1px); }
+}
+@keyframes idle-cat-full-stretch {
+  0%, 100% { transform: perspective(50px) rotateY(0) rotateX(0) translate(0, 0) scale(1); }
+  24% { transform: perspective(50px) rotateY(-8deg) rotateX(8deg) translate(0, 2px) scale(.94, .94); }
+  50%, 68% { transform: perspective(50px) rotateY(14deg) rotateX(18deg) translate(3px, 5px) scale(1.1, 1.18); }
+  86% { transform: perspective(50px) rotateY(-4deg) rotateX(-4deg) translate(-1px, -1px) scale(.98); }
+}
+@keyframes idle-cat-paw-chase {
+  from { transform: perspective(42px) rotateY(-18deg) rotateX(-10deg) translate(0, 0); }
+  to { transform: perspective(42px) rotateY(22deg) rotateX(18deg) translate(2px, 4px); }
+}
+@keyframes idle-cat-curious {
+  0%, 100% { transform: perspective(100px) rotateY(0) rotateX(0) translate(0, 0) rotate(0) scale(1); }
+  20%, 60% { transform: perspective(100px) rotateY(0) rotateX(0) translate(0, 0) rotate(0) scale(1); }
+  34% { transform: perspective(100px) rotateY(-18deg) rotateX(4deg) translate(1px, -2px) rotate(8deg) scale(1.02, .98); }
+  48% { transform: perspective(100px) rotateY(14deg) rotateX(-5deg) translate(-1px, 1px) rotate(-5deg) scale(.98, 1.02); }
+  76% { transform: perspective(100px) rotateY(-8deg) rotateX(2deg) translate(0, -1px) rotate(3deg) scale(1.01, .99); }
+}
+@keyframes idle-cat-stretch {
+  0%, 100% { transform: translate(0, 0) rotate(0) scale(1); }
+  18% { transform: translate(0, 1px) rotate(0) scale(1, .9); }
+  42% { transform: translate(-1px, -2px) rotate(-4deg) scale(1.12, .94); }
+  58% { transform: translate(0, -3px) rotate(3deg) scale(.92, 1.1); }
+  78% { transform: translate(1px, 0) rotate(0) scale(1.05, .96); }
+}
+@keyframes idle-cat-blink {
+  0%, 91%, 95%, 100% { transform: scaleY(1); }
+  93% { transform: scaleY(.12); }
+}
+@keyframes idle-cat-tail-play {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(16deg); }
+}
+@keyframes idle-cat-laser-pulse {
+  from { box-shadow: 0 0 0 2px rgba(255, 59, 85, .12), 0 0 8px 3px rgba(255, 59, 85, .42); }
+  to { box-shadow: 0 0 0 4px rgba(255, 59, 85, .2), 0 0 14px 6px rgba(255, 59, 85, .62); }
+}
 .skip-link {
   position: fixed; left: 12px; top: 12px; z-index: 50;
   transform: translateY(-150%); background: var(--surface); border: 1px solid var(--line);
@@ -662,7 +798,7 @@ html.has-scroll-reveal .scroll-reveal.is-revealed { opacity: 1; translate: 0 0; 
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .signal-pulses { display: none; }
+  .signal-pulses, .idle-cat, .idle-cat-laser { display: none; }
   .profile-flip-inner { transition: none; }
   *, *::before, *::after {
     animation-duration: .01ms !important; animation-iteration-count: 1 !important;
